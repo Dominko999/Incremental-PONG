@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://c2bf6l3q5jy2e"]
+
+[ext_resource type="Texture2D" uid="uid://c2k7bgfkr4i3k" path="res://data/ball_spritesheet.png" id="1_d60mj"]
+[ext_resource type="Script" uid="uid://ixgxh63g7g2d" path="res://scenes/ball.gd" id="1_ij5cq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij5cq"]
+atlas = ExtResource("1_d60mj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_376qj"]
+atlas = ExtResource("1_d60mj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yk4cr"]
+atlas = ExtResource("1_d60mj")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw2wy"]
+atlas = ExtResource("1_d60mj")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vblhy"]
+atlas = ExtResource("1_d60mj")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31idh"]
+atlas = ExtResource("1_d60mj")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hk63f"]
+atlas = ExtResource("1_d60mj")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vm4s8"]
+atlas = ExtResource("1_d60mj")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2b6yv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ij5cq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_376qj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yk4cr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aw2wy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vblhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31idh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hk63f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vm4s8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_25osk"]
+radius = 8.0
+
+[node name="RigidBody2D" type="RigidBody2D" unique_id=1326835668]
+mass = 0.001
+gravity_scale = 0.0
+script = ExtResource("1_ij5cq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=624750925]
+sprite_frames = SubResource("SpriteFrames_2b6yv")
+autoplay = "default"
+frame_progress = 0.2929684
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1231015440]
+shape = SubResource("CircleShape2D_25osk")
