@@ -1,29 +1,55 @@
 [gd_scene format=3 uid="uid://bosucqc70h8ko"]
 
 [ext_resource type="PackedScene" uid="uid://bggxgrmh8htld" path="res://scenes/player_paddle.tscn" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://ggtt8xus0gpi" path="res://scenes/game.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://c2bf6l3q5jy2e" path="res://scenes/ball.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://7omus5dqmadm" path="res://scenes/enemy.tscn" id="4_lbhrr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebmjs"]
 size = Vector2(576, 42)
 
-[node name="game" type="Node2D" unique_id=254313349]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjtg"]
+size = Vector2(20, 324)
 
-[node name="player_paddle" parent="." unique_id=1418855030 instance=ExtResource("1_ebmjs")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
+size = Vector2(27.5, 408)
+
+[node name="game" type="Node2D" unique_id=254313349]
+script = ExtResource("1_lnu2h")
+
+[node name="player_paddle" parent="." unique_id=1418855030 groups=["Paddles"] instance=ExtResource("1_ebmjs")]
 position = Vector2(24, 160)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=495407337]
 position = Vector2(288, 162)
 zoom = Vector2(2, 2)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1066926703]
+[node name="walls" type="StaticBody2D" parent="." unique_id=1066926703 groups=["Walls"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2041430117]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls" unique_id=2041430117]
 position = Vector2(288, -21)
 shape = SubResource("RectangleShape2D_ebmjs")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1503901042]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls" unique_id=1503901042]
 position = Vector2(288, 345)
 shape = SubResource("RectangleShape2D_ebmjs")
 
 [node name="ball" parent="." unique_id=1326835668 instance=ExtResource("2_qxrlw")]
 position = Vector2(289, 163)
+
+[node name="left_edge" type="StaticBody2D" parent="." unique_id=1305656755 groups=["Player_hurtboxes"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left_edge" unique_id=488811900]
+position = Vector2(-10, 162)
+shape = SubResource("RectangleShape2D_yqjtg")
+
+[node name="right_edge" type="StaticBody2D" parent="." unique_id=1658643120 groups=["Walls"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right_edge" unique_id=223895070]
+position = Vector2(590, 164)
+shape = SubResource("RectangleShape2D_lnu2h")
+
+[node name="CharacterBody2D" parent="." unique_id=1856552717 instance=ExtResource("4_lbhrr")]
+position = Vector2(356, 171)
+
+[connection signal="player_hit" from="ball" to="." method="_on_ball_player_hit"]

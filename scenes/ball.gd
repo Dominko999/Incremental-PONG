@@ -1,16 +1,38 @@
 extends RigidBody2D
 
-@export var speed := 0.1
-var vector := Vector2(0,0)
+@export var speed := 300 #speed of the ball
+var dir : Vector2 # direction in whitch the ball is moving
+signal player_hit
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	vector.x = -speed
-
+	dir = get_direction()
+	
+func get_direction():
+	var new_direction : Vector2
+	new_direction.x = -1
+	new_direction.y = randf_range(-1,1)
+	return new_direction.normalized()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	constant_force = vector
+func _physics_process(delta: float) -> void:
+	var collision = move_and_collide(dir * speed * delta)
+	var collider
+	if collision:
+		collider = collision.get_collider()
+		if collider.is_in_group('Paddles'):
+			bounce_from_paddle(collider)
+		if collider.is_in_group('Walls'):
+			dir = dir.bounce(collision.get_normal())
+		if collider.is_in_group('Player_hurtboxes'):
+			player_hit.emit()
+			queue_free()
 
-func bounce_from_paddle():
-	pass
+func bounce_from_paddle(collider):
+	var ball_y = position.y
+	var paddle_y = collider.position.y
+	var distance = paddle_y - ball_y
+	var paddle_height = collider.height
+	
+	dir.x *= -1
+	dir.y = - distance / paddle_height
+	dir.normalized()

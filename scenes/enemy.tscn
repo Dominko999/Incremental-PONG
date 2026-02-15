@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://7omus5dqmadm"]
+
+[ext_resource type="Texture2D" uid="uid://cdg0dpuun0hnc" path="res://data/enemy_placeholder.png" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://bfa7ljh3txd0v" path="res://scenes/enemy.gd" id="1_md0e3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_md0e3"]
+radius = 14.0
+height = 34.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ra3w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7p1mj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1856552717]
+script = ExtResource("1_md0e3")
+
+[node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=1171953075]
+shape = SubResource("CapsuleShape2D_md0e3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=508640279]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_4ra3w")
+frame_progress = 0.6727163
