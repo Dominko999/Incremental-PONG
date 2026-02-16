@@ -2,6 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://cdg0dpuun0hnc" path="res://data/enemy_placeholder.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://bfa7ljh3txd0v" path="res://scenes/enemy.gd" id="1_md0e3"]
+[ext_resource type="PackedScene" uid="uid://nw8trwg3m77e" path="res://scenes/components/health_component.tscn" id="2_5uy6h"]
+[ext_resource type="PackedScene" uid="uid://c4lpa6lj4f3i2" path="res://scenes/components/hurtbox_component.tscn" id="3_5uy6h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5uy6h"]
+radius = 15.0
+height = 36.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_md0e3"]
 radius = 14.0
@@ -21,7 +27,16 @@ animations = [{
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1856552717]
 script = ExtResource("1_md0e3")
 
-[node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=1171953075]
+[node name="HealthComponent" parent="." unique_id=768647454 instance=ExtResource("2_5uy6h")]
+max_health = 1
+
+[node name="HurtboxComponent" parent="." unique_id=1695061849 node_paths=PackedStringArray("health_component") instance=ExtResource("3_5uy6h")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1169457949]
+shape = SubResource("CapsuleShape2D_5uy6h")
+
+[node name="PhysicsCollision" type="CollisionShape2D" parent="." unique_id=1171953075]
 shape = SubResource("CapsuleShape2D_md0e3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=508640279]

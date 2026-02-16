@@ -58,3 +58,4 @@ ui_down={
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(0.1254902, 0.08235294, 0.2, 1)

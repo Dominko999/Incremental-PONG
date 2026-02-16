@@ -35,7 +35,7 @@ position = Vector2(288, 345)
 shape = SubResource("RectangleShape2D_ebmjs")
 
 [node name="ball" parent="." unique_id=1326835668 instance=ExtResource("2_qxrlw")]
-position = Vector2(289, 163)
+position = Vector2(382, 171)
 
 [node name="left_edge" type="StaticBody2D" parent="." unique_id=1305656755 groups=["Player_hurtboxes"]]
 
@@ -49,7 +49,7 @@ shape = SubResource("RectangleShape2D_yqjtg")
 position = Vector2(590, 164)
 shape = SubResource("RectangleShape2D_lnu2h")
 
-[node name="CharacterBody2D" parent="." unique_id=1856552717 instance=ExtResource("4_lbhrr")]
+[node name="enemy" parent="." unique_id=1856552717 instance=ExtResource("4_lbhrr")]
 position = Vector2(356, 171)
 
 [connection signal="player_hit" from="ball" to="." method="_on_ball_player_hit"]

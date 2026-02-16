@@ -1,8 +1,11 @@
 extends RigidBody2D
 
 @export var speed := 300 #speed of the ball
+@export var hitbox : HitboxComponent
 var dir : Vector2 # direction in whitch the ball is moving
 signal player_hit
+enum FiredBy {ENEMY, PLAYER}
+@export var current_state = FiredBy.ENEMY
 
 func _ready() -> void:
 	dir = get_direction()
@@ -26,12 +29,22 @@ func _physics_process(delta: float) -> void:
 		if collider.is_in_group('Player_hurtboxes'):
 			player_hit.emit()
 			queue_free()
+	
+	match current_state:
+		FiredBy.ENEMY:
+			hitbox.shape.disabled = true
+		FiredBy.PLAYER:
+			print('dziala')
+			hitbox.shape.disabled = false
+			
 
 func bounce_from_paddle(collider):
 	var ball_y = position.y
 	var paddle_y = collider.position.y
 	var distance = paddle_y - ball_y
 	var paddle_height = collider.height
+	
+	current_state = FiredBy.PLAYER
 	
 	dir.x *= -1
 	dir.y = - distance / paddle_height
