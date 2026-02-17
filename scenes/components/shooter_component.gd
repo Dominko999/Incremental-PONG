@@ -4,4 +4,5 @@ class_name ShooterComponent
 @export var projectile_scene : PackedScene
 
 func shoot():
-	projectile_scene.instantiate()
+	var projectile = projectile_scene.instantiate()
+	add_child(projectile)

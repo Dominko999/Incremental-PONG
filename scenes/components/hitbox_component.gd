@@ -1,8 +1,8 @@
 extends Area2D
 class_name HitboxComponent
 
-@export var attack := 1
-@export var shape := CollisionShape2D
+@export var attack : int = 1
+@export var shape : CollisionShape2D
 
 
 func _on_area_entered(area: Area2D) -> void:

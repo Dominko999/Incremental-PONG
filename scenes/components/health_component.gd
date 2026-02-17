@@ -2,7 +2,7 @@ extends Node
 class_name HealthComponent
 
 @export var max_health : int
-@export var health := max_health:
+@export var health : int = max_health:
 	set(new_health):
 		health = new_health
 		health = clamp(health, 0, max_health)

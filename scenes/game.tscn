@@ -22,7 +22,7 @@ position = Vector2(24, 160)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=495407337]
 position = Vector2(288, 162)
-zoom = Vector2(4.5, 4.5)
+zoom = Vector2(2, 2)
 
 [node name="walls" type="StaticBody2D" parent="." unique_id=1066926703 groups=["Walls"]]
 
@@ -51,5 +51,8 @@ shape = SubResource("RectangleShape2D_lnu2h")
 
 [node name="enemy" parent="." unique_id=1856552717 instance=ExtResource("4_lbhrr")]
 position = Vector2(356, 171)
+
+[node name="Ball" parent="." unique_id=1978163994 instance=ExtResource("2_qxrlw")]
+position = Vector2(474, 54)
 
 [connection signal="player_hit" from="ball" to="." method="_on_ball_player_hit"]

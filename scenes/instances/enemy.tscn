@@ -5,14 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://nw8trwg3m77e" path="res://scenes/components/health_component.tscn" id="2_5uy6h"]
 [ext_resource type="PackedScene" uid="uid://c4lpa6lj4f3i2" path="res://scenes/components/hurtbox_component.tscn" id="3_5uy6h"]
 [ext_resource type="Script" uid="uid://bkt5hqoqu0pr3" path="res://scenes/components/shooter_component.gd" id="5_xwavj"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5uy6h"]
-radius = 15.0
-height = 36.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_md0e3"]
-radius = 14.0
-height = 34.0
+[ext_resource type="PackedScene" uid="uid://c2bf6l3q5jy2e" path="res://scenes/instances/ball.tscn" id="6_bhn7d"]
+[ext_resource type="Script" uid="uid://j3gmm1nhrmy2" path="res://scenes/states/state_machine.gd" id="6_v7ugw"]
+[ext_resource type="Script" uid="uid://bkplay2jlppyi" path="res://scenes/states/spawned_state.gd" id="7_sit3b"]
+[ext_resource type="Script" uid="uid://bhphter5pcjc0" path="res://scenes/states/patrol_state.gd" id="8_7v0ic"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ra3w"]
 animations = [{
@@ -25,10 +21,26 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_md0e3"]
+radius = 14.0
+height = 34.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5uy6h"]
+radius = 15.0
+height = 36.0
+
 [node name="Enemy" type="CharacterBody2D" unique_id=1856552717]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_md0e3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=508640279]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_4ra3w")
+frame_progress = 0.6727163
+
+[node name="PhysicsCollision" type="CollisionShape2D" parent="." unique_id=1171953075]
+shape = SubResource("CapsuleShape2D_md0e3")
 
 [node name="HealthComponent" parent="." unique_id=768647454 instance=ExtResource("2_5uy6h")]
 max_health = 1
@@ -39,13 +51,21 @@ health_component = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1169457949]
 shape = SubResource("CapsuleShape2D_5uy6h")
 
-[node name="PhysicsCollision" type="CollisionShape2D" parent="." unique_id=1171953075]
-shape = SubResource("CapsuleShape2D_md0e3")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=508640279]
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_4ra3w")
-frame_progress = 0.6727163
-
 [node name="ShooterComponent" type="Node2D" parent="." unique_id=1634634278]
 script = ExtResource("5_xwavj")
+projectile_scene = ExtResource("6_bhn7d")
+
+[node name="StateMachine" type="Node" parent="." unique_id=410171668 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_v7ugw")
+initial_state = NodePath("SpawnedState")
+
+[node name="SpawnedState" type="Node" parent="StateMachine" unique_id=1658949298 node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_sit3b")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://bkplay2jlppyi"
+
+[node name="PatrolState" type="Node" parent="StateMachine" unique_id=1494353437 node_paths=PackedStringArray("enemy", "shooter")]
+script = ExtResource("8_7v0ic")
+enemy = NodePath("../..")
+shooter = NodePath("../../ShooterComponent")
+metadata/_custom_type_script = "uid://bhphter5pcjc0"

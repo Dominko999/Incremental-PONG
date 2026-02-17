@@ -1,15 +1,12 @@
 extends CharacterBody2D
 
-@export var frequency := 0.3
-@export var distance := 50
+@export var frequency : float = 0.3
+@export var distance : int = 50
 var base_position : Vector2
-var time := 0.0
+var time : float = 0.0
 
 func _ready():
-	base_position = position
-	print(base_position.y)
-
-func _physics_process(delta: float) -> void:
-	time += delta
+	pass
 	
-	position.y = base_position.y + distance * sin(2 * PI * frequency * time)
+func _physics_process(_delta: float) -> void:
+	pass
