@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bosucqc70h8ko"]
 
-[ext_resource type="PackedScene" uid="uid://bggxgrmh8htld" path="res://scenes/player_paddle.tscn" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://bggxgrmh8htld" path="res://scenes/instances/player_paddle.tscn" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://ggtt8xus0gpi" path="res://scenes/game.gd" id="1_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://c2bf6l3q5jy2e" path="res://scenes/ball.tscn" id="2_qxrlw"]
-[ext_resource type="PackedScene" uid="uid://7omus5dqmadm" path="res://scenes/enemy.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://c2bf6l3q5jy2e" path="res://scenes/instances/ball.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://7omus5dqmadm" path="res://scenes/instances/enemy.tscn" id="4_lbhrr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebmjs"]
 size = Vector2(576, 42)
@@ -22,7 +22,7 @@ position = Vector2(24, 160)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=495407337]
 position = Vector2(288, 162)
-zoom = Vector2(2, 2)
+zoom = Vector2(4.5, 4.5)
 
 [node name="walls" type="StaticBody2D" parent="." unique_id=1066926703 groups=["Walls"]]
 

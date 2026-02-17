@@ -34,7 +34,6 @@ func _physics_process(delta: float) -> void:
 		FiredBy.ENEMY:
 			hitbox.shape.disabled = true
 		FiredBy.PLAYER:
-			print('dziala')
 			hitbox.shape.disabled = false
 			
 

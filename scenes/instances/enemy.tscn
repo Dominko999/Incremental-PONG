@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://7omus5dqmadm"]
 
 [ext_resource type="Texture2D" uid="uid://cdg0dpuun0hnc" path="res://data/enemy_placeholder.png" id="1_7p1mj"]
-[ext_resource type="Script" uid="uid://bfa7ljh3txd0v" path="res://scenes/enemy.gd" id="1_md0e3"]
+[ext_resource type="Script" uid="uid://bfa7ljh3txd0v" path="res://scenes/instances/enemy.gd" id="1_md0e3"]
 [ext_resource type="PackedScene" uid="uid://nw8trwg3m77e" path="res://scenes/components/health_component.tscn" id="2_5uy6h"]
 [ext_resource type="PackedScene" uid="uid://c4lpa6lj4f3i2" path="res://scenes/components/hurtbox_component.tscn" id="3_5uy6h"]
+[ext_resource type="Script" uid="uid://bkt5hqoqu0pr3" path="res://scenes/components/shooter_component.gd" id="5_xwavj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5uy6h"]
 radius = 15.0
@@ -24,7 +25,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1856552717]
+[node name="Enemy" type="CharacterBody2D" unique_id=1856552717]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_md0e3")
 
 [node name="HealthComponent" parent="." unique_id=768647454 instance=ExtResource("2_5uy6h")]
@@ -43,3 +46,6 @@ shape = SubResource("CapsuleShape2D_md0e3")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4ra3w")
 frame_progress = 0.6727163
+
+[node name="ShooterComponent" type="Node2D" parent="." unique_id=1634634278]
+script = ExtResource("5_xwavj")

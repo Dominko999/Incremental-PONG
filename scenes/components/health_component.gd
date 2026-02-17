@@ -15,5 +15,4 @@ func take_damage(amount):
 		die()
 
 func die():
-	print("dead")
 	get_parent().queue_free()

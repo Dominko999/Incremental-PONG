@@ -4,7 +4,6 @@ extends CharacterBody2D
 @export var distance := 50
 var base_position : Vector2
 var time := 0.0
-signal take_damage
 
 func _ready():
 	base_position = position

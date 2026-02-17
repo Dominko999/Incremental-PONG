@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c2bf6l3q5jy2e"]
 
 [ext_resource type="Texture2D" uid="uid://c2k7bgfkr4i3k" path="res://data/ball_spritesheet.png" id="1_d60mj"]
-[ext_resource type="Script" uid="uid://ixgxh63g7g2d" path="res://scenes/ball.gd" id="1_ij5cq"]
+[ext_resource type="Script" uid="uid://ixgxh63g7g2d" path="res://scenes/instances/ball.gd" id="1_ij5cq"]
 [ext_resource type="PackedScene" uid="uid://b6o8cy1hhw0sc" path="res://scenes/components/hitbox_component.tscn" id="3_f7cbr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ij5cq"]
@@ -75,6 +75,7 @@ radius = 8.0
 radius = 9.0
 
 [node name="Ball" type="RigidBody2D" unique_id=1326835668 node_paths=PackedStringArray("hitbox")]
+collision_layer = 4
 mass = 0.001
 gravity_scale = 0.0
 script = ExtResource("1_ij5cq")
