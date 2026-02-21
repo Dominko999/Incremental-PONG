@@ -24,11 +24,11 @@ func _physics_process(delta: float) -> void:
 	var collider
 	if collision:
 		collider = collision.get_collider()
-		if collider.is_in_group('Paddles'):
+		if collider.is_in_group('paddles'):
 			bounce_from_paddle(collider)
-		if collider.is_in_group('Walls'):
+		if collider.is_in_group('walls'):
 			dir = dir.bounce(collision.get_normal())
-		if collider.is_in_group('Player_hurtboxes'):
+		if collider.is_in_group('player_hurtboxes'):
 			player_hit.emit()
 			queue_free()
 	

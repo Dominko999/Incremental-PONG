@@ -4,8 +4,7 @@
 [ext_resource type="Script" uid="uid://bfa7ljh3txd0v" path="res://scenes/instances/enemy.gd" id="1_md0e3"]
 [ext_resource type="PackedScene" uid="uid://nw8trwg3m77e" path="res://scenes/components/health_component.tscn" id="2_5uy6h"]
 [ext_resource type="PackedScene" uid="uid://c4lpa6lj4f3i2" path="res://scenes/components/hurtbox_component.tscn" id="3_5uy6h"]
-[ext_resource type="Script" uid="uid://bkt5hqoqu0pr3" path="res://scenes/components/shooter_component.gd" id="5_xwavj"]
-[ext_resource type="PackedScene" uid="uid://c2bf6l3q5jy2e" path="res://scenes/instances/ball.tscn" id="6_bhn7d"]
+[ext_resource type="PackedScene" uid="uid://ct5wsomtivuq8" path="res://scenes/components/shooter_component.tscn" id="5_7v0ic"]
 [ext_resource type="Script" uid="uid://j3gmm1nhrmy2" path="res://scenes/states/state_machine.gd" id="6_v7ugw"]
 [ext_resource type="Script" uid="uid://bkplay2jlppyi" path="res://scenes/states/spawned_state.gd" id="7_sit3b"]
 [ext_resource type="Script" uid="uid://bhphter5pcjc0" path="res://scenes/states/patrol_state.gd" id="8_7v0ic"]
@@ -51,9 +50,7 @@ health_component = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1169457949]
 shape = SubResource("CapsuleShape2D_5uy6h")
 
-[node name="ShooterComponent" type="Node2D" parent="." unique_id=1634634278]
-script = ExtResource("5_xwavj")
-projectile_scene = ExtResource("6_bhn7d")
+[node name="ShooterComponent" parent="." unique_id=1041346552 instance=ExtResource("5_7v0ic")]
 
 [node name="StateMachine" type="Node" parent="." unique_id=410171668 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_v7ugw")
