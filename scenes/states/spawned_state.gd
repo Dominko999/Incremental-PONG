@@ -7,8 +7,8 @@ class_name SpawnedState
 var go_to_location : Vector2
 
 func enter() -> void:
-	go_to_location = enemy.position
-	enemy.position.x = go_to_location.x + 300
+	go_to_location = Vector2(randf_range(300,600),randf_range(50,300))
+	enemy.position.x = randi_range(600,700)
 	enemy.position.y = go_to_location.y + randi_range(-100,100)
 
 func physics_update(delta: float) -> void:

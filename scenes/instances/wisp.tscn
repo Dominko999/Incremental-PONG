@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b4s4vsu3dpd5g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yhx0g"]
+
+[node name="Wisp" type="RigidBody2D" unique_id=521878976]
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=481164913]
+polygon = PackedVector2Array(-5, -5, -6, 5, 6, 5, 5, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=255600997]
+shape = SubResource("CircleShape2D_yhx0g")
