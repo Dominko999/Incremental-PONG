@@ -43,13 +43,13 @@ shape = SubResource("RectangleShape2D_ebmjs")
 [node name="left_edge" type="StaticBody2D" parent="game" unique_id=1305656755 groups=["left_edge"]]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="game/left_edge" unique_id=488811900]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="game/left_edge" unique_id=488811900 groups=["left_edge"]]
 position = Vector2(-10, 162)
 shape = SubResource("RectangleShape2D_yqjtg")
 
 [node name="right_edge" type="StaticBody2D" parent="game" unique_id=1658643120 groups=["walls"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="game/right_edge" unique_id=223895070]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="game/right_edge" unique_id=223895070 groups=["walls"]]
 position = Vector2(590, 164)
 shape = SubResource("RectangleShape2D_lnu2h")
 
