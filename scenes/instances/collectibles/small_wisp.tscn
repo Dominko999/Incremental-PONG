@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://b4s4vsu3dpd5g"]
+
+[ext_resource type="Texture2D" uid="uid://c8xqie7f8uio4" path="res://data/wisp_spritesheet.png" id="1_rgb0j"]
+[ext_resource type="Script" uid="uid://byp2junscixag" path="res://scenes/instances/collectibles/small_wisp.gd" id="1_yyfgy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yhx0g"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg0ks"]
+atlas = ExtResource("1_rgb0j")
+region = Rect2(0, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmj14"]
+atlas = ExtResource("1_rgb0j")
+region = Rect2(10, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uihtk"]
+atlas = ExtResource("1_rgb0j")
+region = Rect2(20, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5nwb"]
+atlas = ExtResource("1_rgb0j")
+region = Rect2(30, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmykx"]
+atlas = ExtResource("1_rgb0j")
+region = Rect2(40, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypho5"]
+atlas = ExtResource("1_rgb0j")
+region = Rect2(50, 0, 10, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p88q0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg0ks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmj14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uihtk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5nwb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmykx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypho5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="SmallWisp" type="Area2D" unique_id=390787819]
+script = ExtResource("1_yyfgy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=255600997]
+shape = SubResource("CircleShape2D_yhx0g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=969829303]
+sprite_frames = SubResource("SpriteFrames_p88q0")
+autoplay = "default"
+frame_progress = 0.26382428

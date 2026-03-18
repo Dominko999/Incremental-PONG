@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 			bounce_from_paddle(collider)
 		if collider.is_in_group('walls'):
 			dir = dir.bounce(collision.get_normal())
-		if collider.is_in_group('player_hurtboxes'):
+		if collider.is_in_group('left_edge'):
 			player_hit.emit()
 			queue_free()
 	

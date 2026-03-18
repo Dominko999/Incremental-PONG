@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://ggtt8xus0gpi" path="res://scenes/game.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://7omus5dqmadm" path="res://scenes/instances/enemy.tscn" id="4_lbhrr"]
 [ext_resource type="Script" uid="uid://dbnu8jdm0ukv2" path="res://scenes/enemy_spawner.gd" id="4_wowpa"]
+[ext_resource type="PackedScene" uid="uid://b4s4vsu3dpd5g" path="res://scenes/instances/collectibles/small_wisp.tscn" id="5_iywne"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(576, 17)
@@ -22,7 +23,7 @@ size = Vector2(27.5, 408)
 [node name="game" type="Node2D" parent="." unique_id=254313349]
 script = ExtResource("1_lnu2h")
 
-[node name="player_paddle" parent="game" unique_id=1418855030 groups=["paddles"] instance=ExtResource("1_ebmjs")]
+[node name="player_paddle" parent="game" unique_id=1418855030 groups=["currency_collector", "paddles"] instance=ExtResource("1_ebmjs")]
 position = Vector2(24, 160)
 
 [node name="Camera2D" type="Camera2D" parent="game" unique_id=495407337]
@@ -39,7 +40,7 @@ shape = SubResource("RectangleShape2D_lbhrr")
 position = Vector2(288, 329.75)
 shape = SubResource("RectangleShape2D_ebmjs")
 
-[node name="left_edge" type="StaticBody2D" parent="game" unique_id=1305656755 groups=["player_hurtboxes"]]
+[node name="left_edge" type="StaticBody2D" parent="game" unique_id=1305656755 groups=["left_edge"]]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="game/left_edge" unique_id=488811900]
@@ -62,3 +63,6 @@ position = Vector2(356, 171)
 [node name="EnemySpawner" type="Node" parent="game" unique_id=378806511]
 script = ExtResource("4_wowpa")
 enemy_scene = ExtResource("4_lbhrr")
+
+[node name="SmallWisp" parent="game" unique_id=390787819 instance=ExtResource("5_iywne")]
+position = Vector2(507, 158)
