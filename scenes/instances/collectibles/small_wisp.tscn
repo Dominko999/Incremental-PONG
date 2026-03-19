@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://c8xqie7f8uio4" path="res://data/wisp_spritesheet.png" id="1_rgb0j"]
 [ext_resource type="Script" uid="uid://byp2junscixag" path="res://scenes/instances/collectibles/small_wisp.gd" id="1_yyfgy"]
+[ext_resource type="Script" uid="uid://cu5s10566rprs" path="res://scenes/instances/collectibles/currency_reward.gd" id="2_p1gbo"]
+[ext_resource type="Resource" uid="uid://brvrx0bhm0f5s" path="res://scenes/instances/collectibles/small_wisp.tres" id="3_ihhsj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yhx0g"]
 radius = 5.0
@@ -57,7 +59,9 @@ animations = [{
 }]
 
 [node name="SmallWisp" type="Area2D" unique_id=390787819]
+collision_layer = 32
 script = ExtResource("1_yyfgy")
+currency_rewards = Array[ExtResource("2_p1gbo")]([ExtResource("3_ihhsj")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=255600997]
 shape = SubResource("CircleShape2D_yhx0g")

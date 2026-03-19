@@ -14,3 +14,4 @@ var currencies : Dictionary # przechowywuje ilość wszystkich walut, jakie ma g
 func add_currency(currency : Currency, amount):
 	var id = currency.id
 	currencies[id] = currencies.get(id, 0) + amount
+	print(currencies[id])

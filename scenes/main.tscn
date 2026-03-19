@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bosucqc70h8ko"]
+
+[ext_resource type="Script" uid="uid://bsslij1k36l4m" path="res://scenes/game_manager.gd" id="1_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://ng0edt8mn4b5" path="res://scenes/gameplay.tscn" id="2_wrm1d"]
+[ext_resource type="Script" uid="uid://qb3atxn8u6lf" path="res://scenes/upgrade_tree.gd" id="3_sugp2"]
+
+[node name="GameManager" type="Node" unique_id=1430559657]
+script = ExtResource("1_qxrlw")
+gameplay_scene = ExtResource("2_wrm1d")
+
+[node name="menu" type="Node2D" parent="." unique_id=238770156]
+script = ExtResource("3_sugp2")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=280818732]

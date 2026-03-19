@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://ng0edt8mn4b5"]
+
+[ext_resource type="Script" uid="uid://ggtt8xus0gpi" path="res://scenes/gameplay.gd" id="1_r8bcl"]
+[ext_resource type="PackedScene" uid="uid://bggxgrmh8htld" path="res://scenes/instances/player_paddle.tscn" id="2_rlidi"]
+[ext_resource type="PackedScene" uid="uid://7omus5dqmadm" path="res://scenes/instances/enemy.tscn" id="3_1qnfl"]
+[ext_resource type="Script" uid="uid://dbnu8jdm0ukv2" path="res://scenes/spawner.gd" id="4_urrcd"]
+[ext_resource type="PackedScene" uid="uid://b4s4vsu3dpd5g" path="res://scenes/instances/collectibles/small_wisp.tscn" id="5_puebw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
+size = Vector2(1920, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebmjs"]
+size = Vector2(1920, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjtg"]
+size = Vector2(30, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
+size = Vector2(30, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wowpa"]
+size = Vector2(30, 2000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6g32"]
+size = Vector2(30, 980)
+
+[node name="gameplay" type="Node2D" unique_id=979873657]
+script = ExtResource("1_r8bcl")
+
+[node name="player_paddle" parent="." unique_id=1418855030 groups=["currency_collector", "paddles"] instance=ExtResource("2_rlidi")]
+position = Vector2(-900, 0)
+collision_mask = 33
+
+[node name="walls" type="StaticBody2D" parent="." unique_id=127075650 groups=["walls"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls" unique_id=1259832105]
+position = Vector2(0, -540)
+shape = SubResource("RectangleShape2D_lbhrr")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls" unique_id=1157535041]
+position = Vector2(0, 540)
+shape = SubResource("RectangleShape2D_ebmjs")
+
+[node name="left_edge" type="StaticBody2D" parent="." unique_id=381340775 groups=["left_edge"]]
+position = Vector2(-960, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left_edge" unique_id=213149161 groups=["left_edge"]]
+shape = SubResource("RectangleShape2D_yqjtg")
+
+[node name="right_edge" type="StaticBody2D" parent="." unique_id=1411896212 groups=["walls"]]
+position = Vector2(960, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right_edge" unique_id=2060370747 groups=["walls"]]
+shape = SubResource("RectangleShape2D_lnu2h")
+
+[node name="projectiles_parent" type="Node2D" parent="." unique_id=1828366239 groups=["projectiles_parent"]]
+
+[node name="enemies_parent" type="Node2D" parent="." unique_id=1320774565 groups=["enemies_parent"]]
+
+[node name="collectibles_parent" type="Node2D" parent="." unique_id=1020216484 groups=["collectibles_parent"]]
+
+[node name="EnemySpawner" type="Area2D" parent="." unique_id=1497105297 node_paths=PackedStringArray("spawn_area_shape")]
+position = Vector2(1020, 0)
+script = ExtResource("4_urrcd")
+scene_to_spawn = ExtResource("3_1qnfl")
+spawn_rate_modifier_name = "enemies_spawn_rate"
+parent_node_name = "enemies_parent"
+treshold_range = Vector2(3, 6)
+spawn_in_child_collision_shape = true
+spawn_area_shape = NodePath("EnemySpawnArea")
+
+[node name="EnemySpawnArea" type="CollisionShape2D" parent="EnemySpawner" unique_id=1435744100]
+shape = SubResource("RectangleShape2D_wowpa")
+
+[node name="SmallWispSpawner" type="Area2D" parent="." unique_id=817658398 node_paths=PackedStringArray("spawn_area_shape")]
+position = Vector2(990, 0)
+script = ExtResource("4_urrcd")
+scene_to_spawn = ExtResource("5_puebw")
+parent_node_name = "collectibles_parent"
+treshold_range = Vector2(0.5, 1)
+spawn_in_child_collision_shape = true
+spawn_area_shape = NodePath("SmallWispSpawnArea")
+metadata/_custom_type_script = "uid://dbnu8jdm0ukv2"
+
+[node name="SmallWispSpawnArea" type="CollisionShape2D" parent="SmallWispSpawner" unique_id=431576649]
+shape = SubResource("RectangleShape2D_i6g32")
