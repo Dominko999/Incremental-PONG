@@ -1,11 +1,12 @@
 extends Scene
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@export var gameplay_scene : PackedScene
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
+func _on_play_button_button_down() -> void:
+	Global.transition_to_gameplay.emit()
+
+
+func _on_quit_button_button_down() -> void:
+	get_tree().quit()

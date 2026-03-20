@@ -1,0 +1,5 @@
+extends Node
+
+signal transition_to_upgrade
+signal transition_to_gameplay
+signal transition_to_menu

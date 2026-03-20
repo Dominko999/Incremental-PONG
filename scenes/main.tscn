@@ -2,13 +2,88 @@
 
 [ext_resource type="Script" uid="uid://bsslij1k36l4m" path="res://scenes/game_manager.gd" id="1_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://ng0edt8mn4b5" path="res://scenes/gameplay.tscn" id="2_wrm1d"]
-[ext_resource type="Script" uid="uid://qb3atxn8u6lf" path="res://scenes/upgrade_tree.gd" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cf5ydjjeu557f" path="res://scenes/menu.tscn" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://cgt0kpdttgkgt" path="res://scenes/blue_currency_label.gd" id="4_jyhfs"]
 
 [node name="GameManager" type="Node" unique_id=1430559657]
 script = ExtResource("1_qxrlw")
 gameplay_scene = ExtResource("2_wrm1d")
-
-[node name="menu" type="Node2D" parent="." unique_id=238770156]
-script = ExtResource("3_sugp2")
+menu_scene = ExtResource("3_sugp2")
+upgrade_scene = ExtResource("2_wrm1d")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=280818732]
+scale = Vector2(3.200001, 3.200001)
+
+[node name="Upgrade" type="Node2D" parent="." unique_id=702591039]
+
+[node name="Control" type="Control" parent="Upgrade" unique_id=35168333]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -791.0
+offset_top = -410.0
+offset_right = 791.0
+offset_bottom = 410.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Upgrade/Control" unique_id=764379492]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.5
+offset_top = -20.0
+offset_right = 80.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UpgradeGameTimeButton" type="Button" parent="Upgrade/Control/VBoxContainer" unique_id=1904291740]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Upgrade game time"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Upgrade/Control" unique_id=549655846]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="GoToMenuButton" type="Button" parent="Upgrade/Control/VBoxContainer2" unique_id=932722936]
+layout_mode = 2
+text = "Go to menu"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Upgrade/Control" unique_id=431045282]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -99.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PlayButton" type="Button" parent="Upgrade/Control/VBoxContainer3" unique_id=1286055417]
+layout_mode = 2
+text = "Play PONG"
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Upgrade/Control" unique_id=1714241550]
+layout_mode = 1
+offset_right = 99.0
+offset_bottom = 31.0
+
+[node name="Label" type="Label" parent="Upgrade/Control/VBoxContainer4" unique_id=99800468]
+layout_mode = 2
+script = ExtResource("4_jyhfs")
