@@ -59,6 +59,7 @@ animations = [{
 }]
 
 [node name="SmallWisp" type="Area2D" unique_id=390787819]
+scale = Vector2(2, 2)
 collision_layer = 32
 script = ExtResource("1_yyfgy")
 currency_rewards = Array[ExtResource("2_p1gbo")]([ExtResource("3_ihhsj")])

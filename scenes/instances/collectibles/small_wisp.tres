@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CurrencyReward" format=3 uid="uid://brvrx0bhm0f5s"]
 
-[ext_resource type="Resource" uid="uid://xqjfr8f1qpse" path="res://currency/wisp.tres" id="1_8lrss"]
+[ext_resource type="Resource" uid="uid://xqjfr8f1qpse" path="res://currency/blue_currency_data.tres" id="1_8lrss"]
 [ext_resource type="Script" uid="uid://cu5s10566rprs" path="res://scenes/instances/collectibles/currency_reward.gd" id="1_y63mi"]
 
 [resource]

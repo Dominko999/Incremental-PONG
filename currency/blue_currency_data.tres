@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Currency" format=3 uid="uid://xqjfr8f1qpse"]
 
-[ext_resource type="Script" uid="uid://b4e3vkw78p763" path="res://systems/currency.gd" id="1_4c4cu"]
+[ext_resource type="Script" uid="uid://b4e3vkw78p763" path="res://currency/currency_data.gd" id="1_4c4cu"]
 [ext_resource type="Texture2D" uid="uid://d2d2mm1q8tsgc" path="res://data/Sprite-0001.png" id="1_8u2kp"]
 
 [resource]
 script = ExtResource("1_4c4cu")
-id = "wisp"
+name = "WISP"
 display_name = "Wisp"
 icon = ExtResource("1_8u2kp")
 metadata/_custom_type_script = "uid://b4e3vkw78p763"

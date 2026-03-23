@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cf5ydjjeu557f"]
 
-[ext_resource type="Script" uid="uid://qb3atxn8u6lf" path="res://scenes/upgrade_tree.gd" id="1_yqeox"]
+[ext_resource type="Script" uid="uid://qb3atxn8u6lf" path="res://scenes/game scenes/upgrade_tree.gd" id="1_yqeox"]
 
 [node name="menu" type="Node2D" unique_id=935068314]
 scale = Vector2(3.200001, 3.200001)

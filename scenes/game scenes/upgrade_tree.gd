@@ -5,7 +5,7 @@ extends Scene
 
 
 func _on_play_button_button_down() -> void:
-	Global.transition_to_gameplay.emit()
+	Global.transition_to_upgrade.emit()
 
 
 func _on_quit_button_button_down() -> void:

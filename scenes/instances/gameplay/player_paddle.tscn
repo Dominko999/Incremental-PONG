@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bggxgrmh8htld"]
 
-[ext_resource type="Script" uid="uid://8flfwbo8idv8" path="res://paddle_movement.gd" id="1_iwjui"]
+[ext_resource type="Script" uid="uid://8flfwbo8idv8" path="res://scenes/instances/gameplay/paddle_movement.gd" id="1_iwjui"]
 [ext_resource type="Texture2D" uid="uid://ua7ixtndt7tj" path="res://data/paddle_white_spritesheet.png" id="2_563gi"]
 [ext_resource type="Script" uid="uid://j3gmm1nhrmy2" path="res://scenes/states/state_machine.gd" id="3_87ksu"]
 [ext_resource type="Script" uid="uid://dnr1vxu874fql" path="res://scenes/states/paddle_on_ground_state.gd" id="4_4a3w8"]

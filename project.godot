@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalGameStats="*uid://1pgecywyfidp"
 Global="*uid://dppci11ihk8ry"
+GlobalEnums="*uid://b4lequudu2560"
 
 [display]
 

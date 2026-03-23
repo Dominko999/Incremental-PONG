@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://ng0edt8mn4b5"]
 
-[ext_resource type="Script" uid="uid://ggtt8xus0gpi" path="res://scenes/gameplay.gd" id="1_r8bcl"]
-[ext_resource type="PackedScene" uid="uid://bggxgrmh8htld" path="res://scenes/instances/player_paddle.tscn" id="2_rlidi"]
-[ext_resource type="PackedScene" uid="uid://7omus5dqmadm" path="res://scenes/instances/enemy.tscn" id="3_1qnfl"]
-[ext_resource type="Script" uid="uid://dbnu8jdm0ukv2" path="res://scenes/spawner.gd" id="4_urrcd"]
+[ext_resource type="Script" uid="uid://ggtt8xus0gpi" path="res://scenes/game scenes/gameplay.gd" id="1_r8bcl"]
+[ext_resource type="PackedScene" uid="uid://bggxgrmh8htld" path="res://scenes/instances/gameplay/player_paddle.tscn" id="2_rlidi"]
+[ext_resource type="PackedScene" uid="uid://7omus5dqmadm" path="res://scenes/instances/gameplay/enemy.tscn" id="3_1qnfl"]
+[ext_resource type="Script" uid="uid://dbnu8jdm0ukv2" path="res://scenes/instances/gameplay/spawner.gd" id="4_urrcd"]
 [ext_resource type="PackedScene" uid="uid://b4s4vsu3dpd5g" path="res://scenes/instances/collectibles/small_wisp.tscn" id="5_puebw"]
+[ext_resource type="Script" uid="uid://bclkxb2jnterm" path="res://systems/progress_bar.gd" id="6_8stqr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(1920, 30)
@@ -29,6 +30,7 @@ script = ExtResource("1_r8bcl")
 
 [node name="player_paddle" parent="." unique_id=1418855030 groups=["currency_collector", "paddles"] instance=ExtResource("2_rlidi")]
 position = Vector2(-900, 0)
+scale = Vector2(2, 2)
 collision_mask = 33
 
 [node name="walls" type="StaticBody2D" parent="." unique_id=127075650 groups=["walls"]]
@@ -84,3 +86,20 @@ metadata/_custom_type_script = "uid://dbnu8jdm0ukv2"
 
 [node name="SmallWispSpawnArea" type="CollisionShape2D" parent="SmallWispSpawner" unique_id=431576649]
 shape = SubResource("RectangleShape2D_i6g32")
+
+[node name="UI" type="Control" parent="." unique_id=1336958336]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -863.0
+offset_top = -456.0
+offset_right = 865.0
+offset_bottom = 496.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="RoundDurationBar" type="ProgressBar" parent="UI" unique_id=596403656]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 168.0
+offset_bottom = 27.0
+script = ExtResource("6_8stqr")

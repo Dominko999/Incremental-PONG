@@ -1,7 +1,7 @@
 extends Node
 class_name GameManager
 
-var current_scene : Scene
+var current_scene : Node
 @export var gameplay_scene : PackedScene
 @export var menu_scene : PackedScene
 @export var upgrade_scene : PackedScene

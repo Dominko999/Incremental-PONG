@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://dd7nha7yc1yt5"]
+
+[ext_resource type="Script" uid="uid://cgt0kpdttgkgt" path="res://scenes/instances/upgrade tree/blue_currency_label.gd" id="1_2jbls"]
+[ext_resource type="Script" uid="uid://dsumgrubp0scm" path="res://scenes/game scenes/upgrade.gd" id="1_if82p"]
+[ext_resource type="Resource" uid="uid://xqjfr8f1qpse" path="res://currency/blue_currency_data.tres" id="2_7ivuj"]
+[ext_resource type="Script" uid="uid://dv1eh0x7el4p1" path="res://scenes/game scenes/upgrade_button_control.gd" id="2_7nqns"]
+
+[node name="Upgrade" type="Node2D" unique_id=306167025]
+script = ExtResource("1_if82p")
+
+[node name="Control" type="Control" parent="." unique_id=1784040090]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -791.0
+offset_top = -410.0
+offset_right = 791.0
+offset_bottom = 410.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1233312150]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.5
+offset_top = -20.0
+offset_right = 80.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UpgradeButtonControl" type="Control" parent="Control/VBoxContainer" unique_id=1320865121]
+layout_mode = 2
+script = ExtResource("2_7nqns")
+
+[node name="UpgradeButton" type="Button" parent="Control/VBoxContainer/UpgradeButtonControl" unique_id=472294454]
+layout_mode = 0
+offset_top = -35.0
+offset_right = 161.0
+offset_bottom = -4.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Upgrade game time"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control" unique_id=1219487047]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="GoToMenuButton" type="Button" parent="Control/VBoxContainer2" unique_id=70349572]
+layout_mode = 2
+text = "Go to menu"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control" unique_id=1756686758]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -99.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PlayButton" type="Button" parent="Control/VBoxContainer3" unique_id=358054976]
+layout_mode = 2
+text = "Play PONG"
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Control" unique_id=229821042]
+layout_mode = 1
+offset_right = 99.0
+offset_bottom = 31.0
+
+[node name="Label" type="Label" parent="Control/VBoxContainer4" unique_id=457281597]
+layout_mode = 2
+script = ExtResource("1_2jbls")
+currency = ExtResource("2_7ivuj")
+
+[connection signal="mouse_entered" from="Control/VBoxContainer/UpgradeButtonControl/UpgradeButton" to="Control/VBoxContainer/UpgradeButtonControl" method="_on_upgrade_button_mouse_entered"]
+[connection signal="pressed" from="Control/VBoxContainer/UpgradeButtonControl/UpgradeButton" to="Control/VBoxContainer/UpgradeButtonControl" method="_on_upgrade_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer2/GoToMenuButton" to="." method="_on_go_to_menu_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer3/PlayButton" to="." method="_on_play_button_pressed"]

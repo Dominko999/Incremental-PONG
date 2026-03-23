@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://h777q0vkmet2"]
+
+[ext_resource type="Script" uid="uid://d3yuxola7qj44" path="res://scenes/instances/upgrade tree/upgrade_data.gd" id="1_xio5n"]
+
+[resource]
+script = ExtResource("1_xio5n")
+price = Dictionary[int, int]({
+0: 1
+})
+metadata/_custom_type_script = "uid://d3yuxola7qj44"
