@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dbnu8jdm0ukv2" path="res://scenes/instances/gameplay/spawner.gd" id="4_urrcd"]
 [ext_resource type="PackedScene" uid="uid://b4s4vsu3dpd5g" path="res://scenes/instances/collectibles/small_wisp.tscn" id="5_puebw"]
 [ext_resource type="Script" uid="uid://bclkxb2jnterm" path="res://systems/progress_bar.gd" id="6_8stqr"]
+[ext_resource type="Theme" uid="uid://bvktfcrpfwxtk" path="res://big font_theme.tres" id="6_l8uv0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(1920, 30)
@@ -28,7 +29,8 @@ size = Vector2(30, 980)
 [node name="gameplay" type="Node2D" unique_id=979873657]
 script = ExtResource("1_r8bcl")
 
-[node name="player_paddle" parent="." unique_id=1418855030 groups=["currency_collector", "paddles"] instance=ExtResource("2_rlidi")]
+[node name="PlayerPaddle" parent="." unique_id=1418855030 groups=["currency_collector", "paddles"] instance=ExtResource("2_rlidi")]
+unique_name_in_owner = true
 position = Vector2(-900, 0)
 scale = Vector2(2, 2)
 collision_mask = 33
@@ -62,6 +64,7 @@ shape = SubResource("RectangleShape2D_lnu2h")
 [node name="collectibles_parent" type="Node2D" parent="." unique_id=1020216484 groups=["collectibles_parent"]]
 
 [node name="EnemySpawner" type="Area2D" parent="." unique_id=1497105297 node_paths=PackedStringArray("spawn_area_shape")]
+unique_name_in_owner = true
 position = Vector2(1020, 0)
 script = ExtResource("4_urrcd")
 scene_to_spawn = ExtResource("3_1qnfl")
@@ -75,6 +78,7 @@ spawn_area_shape = NodePath("EnemySpawnArea")
 shape = SubResource("RectangleShape2D_wowpa")
 
 [node name="SmallWispSpawner" type="Area2D" parent="." unique_id=817658398 node_paths=PackedStringArray("spawn_area_shape")]
+unique_name_in_owner = true
 position = Vector2(990, 0)
 script = ExtResource("4_urrcd")
 scene_to_spawn = ExtResource("5_puebw")
@@ -96,10 +100,12 @@ offset_right = 865.0
 offset_bottom = 496.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("6_l8uv0")
 
 [node name="RoundDurationBar" type="ProgressBar" parent="UI" unique_id=596403656]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 168.0
-offset_bottom = 27.0
+offset_right = 863.0
+offset_bottom = 88.0
+show_percentage = false
 script = ExtResource("6_8stqr")

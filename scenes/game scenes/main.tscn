@@ -12,4 +12,3 @@ menu_scene = ExtResource("3_sugp2")
 upgrade_scene = ExtResource("4_rjuhw")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=280818732]
-scale = Vector2(3.200001, 3.200001)

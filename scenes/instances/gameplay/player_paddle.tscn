@@ -134,10 +134,12 @@ initial_state = NodePath("PaddleOnGroundState")
 metadata/_custom_type_script = "uid://j3gmm1nhrmy2"
 
 [node name="PaddleOnGroundState" type="Node" parent="StateMachine" unique_id=221695684 node_paths=PackedStringArray("character")]
+unique_name_in_owner = true
 script = ExtResource("4_4a3w8")
 character = NodePath("../..")
 
 [node name="PaddleAttackState" type="Node" parent="StateMachine" unique_id=1789205582 node_paths=PackedStringArray("character")]
+unique_name_in_owner = true
 script = ExtResource("5_4a3w8")
 character = NodePath("../..")
 attack_distance = 75.0

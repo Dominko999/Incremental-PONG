@@ -2,8 +2,7 @@ extends State
 class_name PaddleOnGroundState
 
 @export var character : CharacterBody2D
-@export var speed : float = 300.0
-@export var jump_velocity : float = 150
+var speed : float = GlobalGameStats.paddle_speed.end_value
 
 func enter() -> void:
 	pass

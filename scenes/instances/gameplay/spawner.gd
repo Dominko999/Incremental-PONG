@@ -22,11 +22,7 @@ var treshold : float
 func _ready() -> void:
 	parent_node = get_tree().get_first_node_in_group(parent_node_name)
 	
-	if spawn_rate_modifier_name:
-		spawn_rate_modifier = GlobalGameStats.get(spawn_rate_modifier_name)
-	else:
-		spawn_rate_modifier = 1
-	
+	spawn_rate_modifier = GlobalGameStats.enemies_spawn_rate.end_value
 	
 	if spawn_in_child_collision_shape:
 		shape = spawn_area_shape.shape

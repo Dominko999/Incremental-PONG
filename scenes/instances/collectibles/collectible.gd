@@ -16,6 +16,5 @@ func collect():
 	if currency_rewards != null:
 		for currency_reward in currency_rewards:
 			GlobalGameStats.add_currency(currency_reward.currency, currency_reward.amount)
-			print('dziala')
 	
 	queue_free()
