@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dbnu8jdm0ukv2" path="res://scenes/instances/gameplay/spawner.gd" id="4_urrcd"]
 [ext_resource type="PackedScene" uid="uid://b4s4vsu3dpd5g" path="res://scenes/instances/collectibles/small_wisp.tscn" id="5_puebw"]
 [ext_resource type="Script" uid="uid://bclkxb2jnterm" path="res://systems/progress_bar.gd" id="6_8stqr"]
-[ext_resource type="Theme" uid="uid://bvktfcrpfwxtk" path="res://big font_theme.tres" id="6_l8uv0"]
+[ext_resource type="Theme" uid="uid://bvktfcrpfwxtk" path="res://big_font_theme.tres" id="6_l8uv0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(1920, 30)

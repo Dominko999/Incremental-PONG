@@ -5,11 +5,11 @@ class_name UpgradeButtonControl
 @export var upgrade_description : String
 @export var upgrades : Array[UpgradeData]
 
-@onready var button_mask : Button = $TextureRect/UpgradeButtonMask
-@onready var tooltip : Control = $Tooltip
-@onready var name_label : Label = $Tooltip/VBoxContainer/UpgradeNameLabel
-@onready var description_label : Label = $Tooltip/VBoxContainer/UpgradeDescriptionLabel
-@onready var price_label : Label = $Tooltip/VBoxContainer/UpgradePriceLabel
+@onready var button_mask : Button = %UpgradeButtonMask
+@onready var tooltip : Control = %Tooltip
+@onready var name_label : Label = $%UpgradeNameLabel
+@onready var description_label : Label = %UpgradeDescriptionLabel
+@onready var price_label : Label = %UpgradePriceLabel
 
 
 var level : int = 0
