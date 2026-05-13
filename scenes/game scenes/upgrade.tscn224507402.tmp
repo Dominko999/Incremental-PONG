@@ -5,7 +5,6 @@
 [ext_resource type="Theme" uid="uid://bvktfcrpfwxtk" path="res://big_font_theme.tres" id="2_n8ddg"]
 [ext_resource type="Script" uid="uid://d3yuxola7qj44" path="res://scenes/instances/upgrade tree/upgrade_data.gd" id="4_trwho"]
 [ext_resource type="Resource" uid="uid://h777q0vkmet2" path="res://scenes/instances/upgrade tree/duration1_upgrade.tres" id="5_dhgv7"]
-[ext_resource type="Resource" uid="uid://dnrpktfyk63c" path="res://scenes/instances/upgrade tree/duration2_upgrade.tres" id="6_dhgv7"]
 [ext_resource type="Theme" uid="uid://3xfygpwkt1lg" path="res://small_font_theme.tres" id="6_trwho"]
 [ext_resource type="Script" uid="uid://beq0lhg4rne4t" path="res://systems/currency_container.gd" id="7_dhgv7"]
 
@@ -67,7 +66,7 @@ theme = ExtResource("2_n8ddg")
 script = ExtResource("2_7nqns")
 upgrade_name = "Duration +"
 upgrade_description = "Makes round duration longer"
-upgrades = Array[ExtResource("4_trwho")]([ExtResource("5_dhgv7"), ExtResource("6_dhgv7")])
+upgrades = Array[ExtResource("4_trwho")]([ExtResource("5_dhgv7")])
 
 [node name="TextureRect" type="TextureRect" parent="Control/UpgradeTree/UpgradeButtonControl" unique_id=200958855]
 layout_mode = 0
@@ -92,39 +91,49 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Tooltip" type="PanelContainer" parent="Control/UpgradeTree/UpgradeButtonControl" unique_id=544076108]
+[node name="Tooltip" type="Control" parent="Control/UpgradeTree/UpgradeButtonControl" unique_id=1576912874]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Background" type="ColorRect" parent="Control/UpgradeTree/UpgradeButtonControl/Tooltip" unique_id=1945015332]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -88.0
-offset_top = 256.0
-offset_right = 89.0
-offset_bottom = 378.0
+offset_left = -175.0
+offset_right = 175.0
+offset_bottom = 182.0
 grow_horizontal = 2
-mouse_filter = 2
-
-[node name="Background" type="ColorRect" parent="Control/UpgradeTree/UpgradeButtonControl/Tooltip" unique_id=1945015332]
-layout_mode = 2
-mouse_filter = 2
 color = Color(0.34260377, 0.25160623, 0.5021645, 1)
 
-[node name="LabelsContainer" type="VBoxContainer" parent="Control/UpgradeTree/UpgradeButtonControl/Tooltip" unique_id=1817979490]
+[node name="LabelsContainer" type="VBoxContainer" parent="Control/UpgradeTree/UpgradeButtonControl/Tooltip/Background" unique_id=1817979490]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -169.0
+offset_right = 169.0
+offset_bottom = 169.0
+grow_horizontal = 2
 
-[node name="UpgradeNameLabel" type="Label" parent="Control/UpgradeTree/UpgradeButtonControl/Tooltip/LabelsContainer" unique_id=1116514937]
+[node name="UpgradeNameLabel" type="Label" parent="Control/UpgradeTree/UpgradeButtonControl/Tooltip/Background/LabelsContainer" unique_id=1116514937]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Name"
 
-[node name="UpgradeDescriptionLabel" type="Label" parent="Control/UpgradeTree/UpgradeButtonControl/Tooltip/LabelsContainer" unique_id=1577892035]
+[node name="UpgradeDescriptionLabel" type="Label" parent="Control/UpgradeTree/UpgradeButtonControl/Tooltip/Background/LabelsContainer" unique_id=1577892035]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4

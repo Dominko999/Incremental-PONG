@@ -9,7 +9,7 @@ signal currency_amount_changed
 @export var type : GlobalEnums.CurrencyType
 
 var amount_available : int = 0:
-	set(value): 
+	set(value):
 		amount_available = value
 		currency_amount_changed.emit()
 		

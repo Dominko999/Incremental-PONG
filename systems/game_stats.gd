@@ -3,16 +3,17 @@ class_name GameStats
 
 var round_duration : Stat = Stat.new(20.0)
 var ball_damage : Stat = Stat.new(1.0)
-var paddle_speed : Stat = Stat.new(500.0)
+var paddle_speed : Stat = Stat.new(5.0)
 var enemies_spawn_rate : Stat = Stat.new(1.0)
 var money_multiplier : Stat = Stat.new(1.0)
 
 var currency_data_dictionary : Dictionary  # przechowywuje dane wszystkich walut, jakie ma gracz
 
 @onready var blue_currency : CurrencyData = preload("res://currency/blue_currency_data.tres")
-
+@onready var red_currency : CurrencyData = preload("res://currency/red_currency_data.tres")
 func _ready() -> void:
 	currency_data_dictionary[blue_currency.type] = blue_currency
+	currency_data_dictionary[red_currency.type] = red_currency
 	Global.upgrade_to_apply.connect(apply_upgrade)
 
 func add_currency(currency : CurrencyData, amount : int):

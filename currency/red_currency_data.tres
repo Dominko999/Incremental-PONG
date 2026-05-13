@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CurrencyData" format=3 uid="uid://c7pjye0w1ibga"]
+
+[ext_resource type="Texture2D" uid="uid://cu61qu0pt22ln" path="res://data/red_currency_placeholder.png" id="1_3sn7i"]
+[ext_resource type="Script" uid="uid://b4e3vkw78p763" path="res://currency/currency_data.gd" id="2_tonq5"]
+
+[resource]
+script = ExtResource("2_tonq5")
+name = "RED"
+display_name = "Red"
+icon = ExtResource("1_3sn7i")
+type = 1
+metadata/_custom_type_script = "uid://b4e3vkw78p763"

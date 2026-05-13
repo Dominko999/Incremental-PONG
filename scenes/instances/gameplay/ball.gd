@@ -7,6 +7,9 @@ signal player_hit
 enum FiredBy {ENEMY, PLAYER}
 @export var current_state = FiredBy.ENEMY
 
+var collision
+var collider
+
 func _ready() -> void:
 	manage_states()
 	dir = get_direction()
@@ -20,8 +23,8 @@ func get_direction():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	manage_states()
-	var collision = move_and_collide(dir * speed * delta)
-	var collider
+	collision = move_and_collide(dir * speed * delta)
+
 	if collision:
 		collider = collision.get_collider()
 		if collider.is_in_group('paddles'):
@@ -49,4 +52,4 @@ func bounce_from_paddle(collider):
 	
 	dir.x *= -1
 	dir.y = - distance / paddle_height
-	dir.normalized()
+	dir = dir.normalized()
