@@ -11,31 +11,58 @@ class_name UpgradeButtonControl
 @onready var description_label : Label = %UpgradeDescriptionLabel
 @onready var labels_container : VBoxContainer = %LabelsContainer
 
-var level : int = 0
-var max_level : int = len(upgrades)
+@export var next_upgrade_buttons : Array[UpgradeButtonControl]
 
-var completed : bool = false
+var level : int = 0
+var max_level : int 
+
+var button_state : GlobalEnums.UpgradeButtonStates
 
 var currency_container : CurrencyContainer
+var completed_label : Label
 
 func _ready() -> void:
+	button_state = GlobalEnums.UpgradeButtonStates['HIDDEN']
+	max_level = len(upgrades) - 1
 	tooltip.visible = false
 	refresh_button()
+	apply_button_state()
+
+func apply_button_state():
+	match button_state:
+		GlobalEnums.UpgradeButtonStates['HIDDEN']:
+			hide()
+		GlobalEnums.UpgradeButtonStates['NOT_UPGRADED']:
+			modulate = Color.GRAY
+		GlobalEnums.UpgradeButtonStates['UPGRADED']:
+			modulate = Color.BLUE
+		GlobalEnums.UpgradeButtonStates['COMPLETED']:
+			modulate = Color.GOLD
+
 
 func refresh_button():
-	if not currency_container:
-		currency_container = CurrencyContainer.new(upgrades[level].price)
-		labels_container.add_child(currency_container)
+	if not button_state == GlobalEnums.UpgradeButtonStates['COMPLETED']:
+		if not currency_container:
+			currency_container = CurrencyContainer.new(upgrades[level].price)
+			labels_container.add_child(currency_container)
+		else:
+			currency_container.currencies_to_display = upgrades[level].price
+		fill_tooltip()
 	else:
-		currency_container.currencies_to_display = upgrades[level].price
-		
-	fill_tooltip()
-	
+		if currency_container:
+			currency_container.queue_free()
+
+func add_completed_label():
+	if not completed_label:
+		completed_label = Label.new()
+		completed_label.text = "COMPLETED"
+		labels_container.add_child(completed_label)
 
 func check_level():
-	if level >= max_level:
-		completed = true
+	if level > max_level:
+		button_state = GlobalEnums.UpgradeButtonStates["COMPLETED"]
 		button_mask.disabled = true
+		add_completed_label()
 	refresh_button()
 
 func fill_tooltip():

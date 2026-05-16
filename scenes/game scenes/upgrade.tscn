@@ -8,6 +8,9 @@
 [ext_resource type="Resource" uid="uid://dnrpktfyk63c" path="res://scenes/instances/upgrade tree/duration2_upgrade.tres" id="6_dhgv7"]
 [ext_resource type="Theme" uid="uid://3xfygpwkt1lg" path="res://small_font_theme.tres" id="6_trwho"]
 [ext_resource type="Script" uid="uid://beq0lhg4rne4t" path="res://systems/currency_container.gd" id="7_dhgv7"]
+[ext_resource type="Script" uid="uid://bwde3ynh2j2wr" path="res://scenes/game scenes/debug_menu_container.gd" id="9_i4ltn"]
+[ext_resource type="Texture2D" uid="uid://d2d2mm1q8tsgc" path="res://data/Sprite-0001.png" id="10_hf487"]
+[ext_resource type="Texture2D" uid="uid://cu61qu0pt22ln" path="res://data/red_currency_placeholder.png" id="11_3scvy"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_skp3n"]
 load_path = "res://.godot/imported/icons.png-06c4adc863e4d0fff65fb583b179b764.ctex"
@@ -131,7 +134,7 @@ size_flags_horizontal = 4
 theme = ExtResource("6_trwho")
 text = "Description"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control" unique_id=1219487047]
+[node name="GoToMenuContainer" type="VBoxContainer" parent="Control" unique_id=1219487047]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -141,11 +144,11 @@ offset_right = 354.0
 offset_bottom = 264.0
 grow_vertical = 0
 
-[node name="GoToMenuButton" type="Button" parent="Control/VBoxContainer2" unique_id=70349572]
+[node name="GoToMenuButton" type="Button" parent="Control/GoToMenuContainer" unique_id=70349572]
 layout_mode = 2
 text = "Go to menu"
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Control" unique_id=1756686758]
+[node name="PlayButtonContainer" type="VBoxContainer" parent="Control" unique_id=1756686758]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -157,7 +160,7 @@ offset_top = -31.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="PlayButton" type="Button" parent="Control/VBoxContainer3" unique_id=358054976]
+[node name="PlayButton" type="Button" parent="Control/PlayButtonContainer" unique_id=358054976]
 layout_mode = 2
 text = "Play PONG"
 
@@ -169,8 +172,66 @@ offset_bottom = 40.0
 script = ExtResource("7_dhgv7")
 metadata/_custom_type_script = "uid://beq0lhg4rne4t"
 
+[node name="DebugMenuContainer" type="PanelContainer" parent="Control" unique_id=2049097078]
+layout_mode = 0
+offset_left = 1187.0
+offset_right = 1582.0
+offset_bottom = 92.0
+script = ExtResource("9_i4ltn")
+
+[node name="ColorRect" type="ColorRect" parent="Control/DebugMenuContainer" unique_id=928853483]
+layout_mode = 2
+color = Color(0.23151812, 0.23151812, 0.23151812, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/DebugMenuContainer" unique_id=830772028]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/DebugMenuContainer/VBoxContainer" unique_id=2071487149]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/DebugMenuContainer/VBoxContainer/HBoxContainer" unique_id=234356306]
+layout_mode = 2
+texture = ExtResource("10_hf487")
+expand_mode = 2
+
+[node name="AddTenBlueButton" type="Button" parent="Control/DebugMenuContainer/VBoxContainer/HBoxContainer" unique_id=1152709797]
+layout_mode = 2
+text = "+10"
+
+[node name="AddThousandBlueButton" type="Button" parent="Control/DebugMenuContainer/VBoxContainer/HBoxContainer" unique_id=726722294]
+layout_mode = 2
+text = "+1000"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/DebugMenuContainer/VBoxContainer" unique_id=1406644693]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/DebugMenuContainer/VBoxContainer/HBoxContainer2" unique_id=1438217683]
+layout_mode = 2
+texture = ExtResource("11_3scvy")
+expand_mode = 2
+
+[node name="AddTenRedButton" type="Button" parent="Control/DebugMenuContainer/VBoxContainer/HBoxContainer2" unique_id=58928366]
+layout_mode = 2
+text = "+10"
+
+[node name="AddThousandRedButton" type="Button" parent="Control/DebugMenuContainer/VBoxContainer/HBoxContainer2" unique_id=230685851]
+layout_mode = 2
+text = "+1000"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/DebugMenuContainer/VBoxContainer" unique_id=918782041]
+layout_mode = 2
+
+[node name="ClearAllCurrenciesButton" type="Button" parent="Control/DebugMenuContainer/VBoxContainer/HBoxContainer3" unique_id=1992419777]
+layout_mode = 2
+text = "Clear All"
+
 [connection signal="mouse_entered" from="Control/UpgradeTree/UpgradeButtonControl/TextureRect/UpgradeButtonMask" to="Control/UpgradeTree/UpgradeButtonControl" method="_on_upgrade_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/UpgradeTree/UpgradeButtonControl/TextureRect/UpgradeButtonMask" to="Control/UpgradeTree/UpgradeButtonControl" method="_on_upgrade_button_mouse_exited"]
 [connection signal="pressed" from="Control/UpgradeTree/UpgradeButtonControl/TextureRect/UpgradeButtonMask" to="Control/UpgradeTree/UpgradeButtonControl" method="_on_upgrade_button_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer2/GoToMenuButton" to="." method="_on_go_to_menu_button_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer3/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Control/GoToMenuContainer/GoToMenuButton" to="." method="_on_go_to_menu_button_pressed"]
+[connection signal="pressed" from="Control/PlayButtonContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Control/DebugMenuContainer/VBoxContainer/HBoxContainer/AddTenBlueButton" to="Control/DebugMenuContainer" method="_on_add_ten_blue_button_pressed"]
+[connection signal="pressed" from="Control/DebugMenuContainer/VBoxContainer/HBoxContainer/AddThousandBlueButton" to="Control/DebugMenuContainer" method="_on_add_thousand_blue_button_pressed"]
+[connection signal="pressed" from="Control/DebugMenuContainer/VBoxContainer/HBoxContainer2/AddTenRedButton" to="Control/DebugMenuContainer" method="_on_add_ten_red_button_pressed"]
+[connection signal="pressed" from="Control/DebugMenuContainer/VBoxContainer/HBoxContainer2/AddThousandRedButton" to="Control/DebugMenuContainer" method="_on_add_thousand_red_button_pressed"]
+[connection signal="pressed" from="Control/DebugMenuContainer/VBoxContainer/HBoxContainer3/ClearAllCurrenciesButton" to="Control/DebugMenuContainer" method="_on_clear_all_currencies_button_pressed"]

@@ -20,8 +20,8 @@ func physics_update(delta: float) -> void:
 	
 	var direction := Input.get_axis("ui_up", "ui_down")
 	if direction:
-		character.velocity.y = direction * speed * 50
+		character.velocity.y = direction * speed
 	else:
-		character.velocity.y = move_toward(character.velocity.y, 0, speed)
+		character.velocity.y = move_toward(character.velocity.y, 0, speed/10)
 
 	character.move_and_slide()

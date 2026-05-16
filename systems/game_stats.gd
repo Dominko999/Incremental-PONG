@@ -3,7 +3,7 @@ class_name GameStats
 
 var round_duration : Stat = Stat.new(20.0)
 var ball_damage : Stat = Stat.new(1.0)
-var paddle_speed : Stat = Stat.new(5.0)
+var paddle_speed : Stat = Stat.new(500.0)
 var enemies_spawn_rate : Stat = Stat.new(1.0)
 var money_multiplier : Stat = Stat.new(1.0)
 
