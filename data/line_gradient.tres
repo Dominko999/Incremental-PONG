@@ -1,0 +1,5 @@
+[gd_resource type="Gradient" format=3 uid="uid://bfbe8fdbmdtw2"]
+
+[resource]
+resource_name = "line_gradient"
+colors = PackedColorArray(1, 1, 1, 1, 0.05342087, 0.053420886, 0.05342088, 0)

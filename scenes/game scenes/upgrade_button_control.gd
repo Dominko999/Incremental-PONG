@@ -23,6 +23,7 @@ var completed_label : Label
 @onready var labels_container : VBoxContainer = %LabelsContainer
 @onready var texture_rect : TextureRect = %TextureRect
 
+
 func _ready() -> void:
 	button_state = GlobalEnums.UpgradeButtonStates.NOT_UPGRADED
 	texture_rect.texture = texture
@@ -31,10 +32,12 @@ func _ready() -> void:
 	refresh_button()
 	apply_button_state()
 
+
 func set_state(new_state : GlobalEnums.UpgradeButtonStates) -> void:
 	button_state = new_state
 	apply_button_state()
 	refresh_button()
+
 
 func apply_button_state():
 	match button_state:
@@ -65,11 +68,15 @@ func refresh_button():
 		if currency_container:
 			currency_container.queue_free()
 
+
 func add_completed_label():
 	if not completed_label:
 		completed_label = Label.new()
 		completed_label.text = "COMPLETED"
+		completed_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		labels_container.add_child(completed_label)
+		
+
 
 func check_level():
 	if level > max_level:
@@ -78,25 +85,29 @@ func check_level():
 		add_completed_label()
 	refresh_button()
 
+
 func fill_tooltip():
 	name_label.text = upgrade_name
 	description_label.text = upgrade_description
 	
 
+
 func upgrade_failed():
 	GlobalTweens.shake(self, 20, 0.2)
 	GlobalTweens.flash(self, Color.RED, 0.3)
 
+
 func upgrade_success():
 	GlobalTweens.scale_up_and_down(self,1.1,1,0.2,0.2)
 	GlobalTweens.flash(self, Color.GREEN, 0.3)
-	GlobalSignals.upgrade_to_apply.emit(upgrades[level])
 	level += 1
 	check_level()
+
 
 func _on_upgrade_button_pressed() -> void:
 	if button_state != GlobalEnums.UpgradeButtonStates.COMPLETED:
 		upgrade_requested.emit(self)
+
 
 func _on_upgrade_button_mouse_entered() -> void:
 	tooltip.visible = true
