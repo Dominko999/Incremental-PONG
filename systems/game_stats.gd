@@ -14,11 +14,11 @@ var currency_data_dictionary : Dictionary  # przechowywuje dane wszystkich walut
 func _ready() -> void:
 	currency_data_dictionary[blue_currency.type] = blue_currency
 	currency_data_dictionary[red_currency.type] = red_currency
-	Global.upgrade_to_apply.connect(apply_upgrade)
+	GlobalSignals.upgrade_to_apply.connect(apply_upgrade)
 
 func add_currency(currency : CurrencyData, amount : int):
 	currency_data_dictionary[currency.type].amount_available += amount
-	Global.emit_signal("currency_changed", currency.type, amount)
+	GlobalSignals.emit_signal("currency_changed", currency.type, amount)
 
 func try_upgrade(upgrade_data : UpgradeData):
 	for currency in upgrade_data.price:
@@ -27,7 +27,7 @@ func try_upgrade(upgrade_data : UpgradeData):
 			return
 	apply_upgrade(upgrade_data)
 
-func apply_upgrade(upgrade_data : UpgradeData):
+func apply_upgrade(upgrade_data : UpgradeData): ## Increases stats specified and subtracts currency
 	for currency in upgrade_data.price:
 		var cost = upgrade_data.price[currency]
 		currency_data_dictionary[currency].amount_available -= cost

@@ -10,9 +10,9 @@ var current_scene : Node
 
 func _ready() -> void:
 	load_scene(menu_scene)
-	Global.transition_to_gameplay.connect(load_scene.bind(gameplay_scene))
-	Global.transition_to_upgrade.connect(load_scene.bind(upgrade_scene))
-	Global.transition_to_menu.connect(load_scene.bind(menu_scene))
+	GlobalSignals.transition_to_gameplay.connect(load_scene.bind(gameplay_scene))
+	GlobalSignals.transition_to_upgrade.connect(load_scene.bind(upgrade_scene))
+	GlobalSignals.transition_to_menu.connect(load_scene.bind(menu_scene))
 
 
 func load_scene(scene : PackedScene):

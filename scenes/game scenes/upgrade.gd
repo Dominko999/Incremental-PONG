@@ -15,8 +15,8 @@ func _process(_delta: float) -> void:
 
 
 func _on_play_button_pressed() -> void:
-	Global.transition_to_gameplay.emit()
+	GlobalSignals.transition_to_gameplay.emit()
 
 
 func _on_go_to_menu_button_pressed() -> void:
-	Global.transition_to_menu.emit()
+	GlobalSignals.transition_to_menu.emit()

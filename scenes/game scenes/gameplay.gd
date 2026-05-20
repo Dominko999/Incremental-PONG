@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 	round_time_remaining -= delta
 	round_duration_bar.value = round_time_remaining
 	if round_time_remaining <= 0:
-		Global.transition_to_upgrade.emit()
+		GlobalSignals.transition_to_upgrade.emit()
 
 func _on_ball_player_hit() -> void:
 	round_time_remaining -= 1

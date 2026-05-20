@@ -1,23 +1,15 @@
 [gd_scene format=3 uid="uid://dd7nha7yc1yt5"]
 
 [ext_resource type="Script" uid="uid://dsumgrubp0scm" path="res://scenes/game scenes/upgrade.gd" id="1_if82p"]
-[ext_resource type="Script" uid="uid://dv1eh0x7el4p1" path="res://scenes/game scenes/upgrade_button_control.gd" id="2_7nqns"]
 [ext_resource type="Theme" uid="uid://bvktfcrpfwxtk" path="res://big_font_theme.tres" id="2_n8ddg"]
-[ext_resource type="Script" uid="uid://d3yuxola7qj44" path="res://scenes/instances/upgrade tree/upgrade_data.gd" id="4_trwho"]
-[ext_resource type="Resource" uid="uid://h777q0vkmet2" path="res://scenes/instances/upgrade tree/duration1_upgrade.tres" id="5_dhgv7"]
-[ext_resource type="Resource" uid="uid://dnrpktfyk63c" path="res://scenes/instances/upgrade tree/duration2_upgrade.tres" id="6_dhgv7"]
-[ext_resource type="Theme" uid="uid://3xfygpwkt1lg" path="res://small_font_theme.tres" id="6_trwho"]
+[ext_resource type="Script" uid="uid://4ko6n2f7hpua" path="res://systems/upgrade_tree.gd" id="3_hf487"]
+[ext_resource type="PackedScene" uid="uid://c4ahxponybpun" path="res://scenes/instances/upgrade tree/upgrade_button_control.tscn" id="5_i4ltn"]
+[ext_resource type="Script" uid="uid://d3yuxola7qj44" path="res://scenes/instances/upgrade tree/upgrade_data.gd" id="6_hf487"]
+[ext_resource type="Resource" uid="uid://chyx3u6hc5cdl" path="res://scenes/instances/upgrade tree/spawn_rate1_upgrade.tres" id="7_3scvy"]
 [ext_resource type="Script" uid="uid://beq0lhg4rne4t" path="res://systems/currency_container.gd" id="7_dhgv7"]
 [ext_resource type="Script" uid="uid://bwde3ynh2j2wr" path="res://scenes/game scenes/debug_menu_container.gd" id="9_i4ltn"]
 [ext_resource type="Texture2D" uid="uid://d2d2mm1q8tsgc" path="res://data/Sprite-0001.png" id="10_hf487"]
 [ext_resource type="Texture2D" uid="uid://cu61qu0pt22ln" path="res://data/red_currency_placeholder.png" id="11_3scvy"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_skp3n"]
-load_path = "res://.godot/imported/icons.png-06c4adc863e4d0fff65fb583b179b764.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_trwho"]
-atlas = SubResource("CompressedTexture2D_skp3n")
-region = Rect2(37, 364, 259, 256)
 
 [node name="Upgrade" type="Node2D" unique_id=306167025]
 script = ExtResource("1_if82p")
@@ -39,100 +31,31 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_n8ddg")
 
-[node name="UpgradeTree" type="Control" parent="Control" unique_id=1467429511]
+[node name="UpgradeTree" type="Control" parent="Control" unique_id=1467429511 node_paths=PackedStringArray("starting_buttons")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -539.0
-offset_top = -273.0
-offset_right = 539.0
-offset_bottom = 273.0
+offset_left = -4914.0
+offset_top = -3587.0
+offset_right = 4914.0
+offset_bottom = 3587.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_hf487")
+starting_buttons = [NodePath("UpgradeButtonControl")]
 
-[node name="UpgradeButtonControl" type="Control" parent="Control/UpgradeTree" unique_id=1320865121]
+[node name="UpgradeButtonControl" parent="Control/UpgradeTree" unique_id=1250718661 node_paths=PackedStringArray("next_upgrade_buttons") instance=ExtResource("5_i4ltn")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -133.0
-offset_top = -132.0
-offset_right = 133.0
-offset_bottom = 132.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_n8ddg")
-script = ExtResource("2_7nqns")
-upgrade_name = "Duration +"
-upgrade_description = "Makes round duration longer"
-upgrades = Array[ExtResource("4_trwho")]([ExtResource("5_dhgv7"), ExtResource("6_dhgv7")])
+next_upgrade_buttons = [NodePath("../UpgradeButtonControl2")]
 
-[node name="TextureRect" type="TextureRect" parent="Control/UpgradeTree/UpgradeButtonControl" unique_id=200958855]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = SubResource("AtlasTexture_trwho")
-
-[node name="UpgradeButtonMask" type="Button" parent="Control/UpgradeTree/UpgradeButtonControl/TextureRect" unique_id=472294454]
-unique_name_in_owner = true
+[node name="UpgradeButtonControl2" parent="Control/UpgradeTree" unique_id=182617067 instance=ExtResource("5_i4ltn")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -122.5
-offset_top = -128.0
-offset_right = 129.5
-offset_bottom = 136.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Tooltip" type="PanelContainer" parent="Control/UpgradeTree/UpgradeButtonControl" unique_id=544076108]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -88.0
-offset_top = 256.0
-offset_right = 89.0
-offset_bottom = 378.0
-grow_horizontal = 2
-mouse_filter = 2
-
-[node name="Background" type="ColorRect" parent="Control/UpgradeTree/UpgradeButtonControl/Tooltip" unique_id=1945015332]
-layout_mode = 2
-mouse_filter = 2
-color = Color(0.34260377, 0.25160623, 0.5021645, 1)
-
-[node name="LabelsContainer" type="VBoxContainer" parent="Control/UpgradeTree/UpgradeButtonControl/Tooltip" unique_id=1817979490]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-
-[node name="UpgradeNameLabel" type="Label" parent="Control/UpgradeTree/UpgradeButtonControl/Tooltip/LabelsContainer" unique_id=1116514937]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Name"
-
-[node name="UpgradeDescriptionLabel" type="Label" parent="Control/UpgradeTree/UpgradeButtonControl/Tooltip/LabelsContainer" unique_id=1577892035]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("6_trwho")
-text = "Description"
+offset_left = -598.0
+offset_right = -332.0
+upgrades = Array[ExtResource("6_hf487")]([ExtResource("7_3scvy")])
 
 [node name="GoToMenuContainer" type="VBoxContainer" parent="Control" unique_id=1219487047]
 layout_mode = 1
@@ -225,9 +148,6 @@ layout_mode = 2
 layout_mode = 2
 text = "Clear All"
 
-[connection signal="mouse_entered" from="Control/UpgradeTree/UpgradeButtonControl/TextureRect/UpgradeButtonMask" to="Control/UpgradeTree/UpgradeButtonControl" method="_on_upgrade_button_mouse_entered"]
-[connection signal="mouse_exited" from="Control/UpgradeTree/UpgradeButtonControl/TextureRect/UpgradeButtonMask" to="Control/UpgradeTree/UpgradeButtonControl" method="_on_upgrade_button_mouse_exited"]
-[connection signal="pressed" from="Control/UpgradeTree/UpgradeButtonControl/TextureRect/UpgradeButtonMask" to="Control/UpgradeTree/UpgradeButtonControl" method="_on_upgrade_button_pressed"]
 [connection signal="pressed" from="Control/GoToMenuContainer/GoToMenuButton" to="." method="_on_go_to_menu_button_pressed"]
 [connection signal="pressed" from="Control/PlayButtonContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Control/DebugMenuContainer/VBoxContainer/HBoxContainer/AddTenBlueButton" to="Control/DebugMenuContainer" method="_on_add_ten_blue_button_pressed"]

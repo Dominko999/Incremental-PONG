@@ -1,10 +1,23 @@
 [gd_scene format=3 uid="uid://cf5ydjjeu557f"]
 
-[ext_resource type="Script" uid="uid://qb3atxn8u6lf" path="res://scenes/game scenes/upgrade_tree.gd" id="1_yqeox"]
 [ext_resource type="Theme" uid="uid://bvktfcrpfwxtk" path="res://big_font_theme.tres" id="2_51q6v"]
 
+[sub_resource type="GDScript" id="GDScript_fddlp"]
+script/source = "extends Scene
+
+@export var gameplay_scene : PackedScene
+
+
+
+func _on_play_button_button_down() -> void:
+	GlobalSignals.transition_to_upgrade.emit()
+
+func _on_quit_button_button_down() -> void:
+	get_tree().quit()
+"
+
 [node name="menu" type="Node2D" unique_id=935068314]
-script = ExtResource("1_yqeox")
+script = SubResource("GDScript_fddlp")
 
 [node name="Control" type="Control" parent="." unique_id=153617434]
 layout_mode = 3

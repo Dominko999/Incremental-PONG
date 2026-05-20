@@ -1,47 +1,60 @@
 extends Control
 class_name UpgradeButtonControl
 
+signal upgrade_requested(button : UpgradeButtonControl)
+
 @export var upgrade_name : String
 @export var upgrade_description : String
 @export var upgrades : Array[UpgradeData]
+@export var next_upgrade_buttons : Array[UpgradeButtonControl]
+@export var texture : Texture
+
+var level : int = 0
+var max_level : int 
+var button_state : GlobalEnums.UpgradeButtonStates
+var currency_container : CurrencyContainer
+var completed_label : Label
+
 
 @onready var button_mask : Button = %UpgradeButtonMask
 @onready var tooltip : Control = %Tooltip
 @onready var name_label : Label = %UpgradeNameLabel
 @onready var description_label : Label = %UpgradeDescriptionLabel
 @onready var labels_container : VBoxContainer = %LabelsContainer
-
-@export var next_upgrade_buttons : Array[UpgradeButtonControl]
-
-var level : int = 0
-var max_level : int 
-
-var button_state : GlobalEnums.UpgradeButtonStates
-
-var currency_container : CurrencyContainer
-var completed_label : Label
+@onready var texture_rect : TextureRect = %TextureRect
 
 func _ready() -> void:
-	button_state = GlobalEnums.UpgradeButtonStates['HIDDEN']
+	button_state = GlobalEnums.UpgradeButtonStates.NOT_UPGRADED
+	texture_rect.texture = texture
 	max_level = len(upgrades) - 1
 	tooltip.visible = false
 	refresh_button()
 	apply_button_state()
 
+func set_state(new_state : GlobalEnums.UpgradeButtonStates) -> void:
+	button_state = new_state
+	apply_button_state()
+	refresh_button()
+
 func apply_button_state():
 	match button_state:
-		GlobalEnums.UpgradeButtonStates['HIDDEN']:
+		GlobalEnums.UpgradeButtonStates.HIDDEN:
 			hide()
-		GlobalEnums.UpgradeButtonStates['NOT_UPGRADED']:
+			button_mask.disabled = true
+		GlobalEnums.UpgradeButtonStates.NOT_UPGRADED:
+			show()
 			modulate = Color.GRAY
-		GlobalEnums.UpgradeButtonStates['UPGRADED']:
-			modulate = Color.BLUE
-		GlobalEnums.UpgradeButtonStates['COMPLETED']:
-			modulate = Color.GOLD
+			button_mask.disabled = false
+		GlobalEnums.UpgradeButtonStates.UPGRADED:
+			show()
+			button_mask.disabled = false
+		GlobalEnums.UpgradeButtonStates.COMPLETED:
+			show()
+			button_mask.disabled = true
 
 
 func refresh_button():
-	if not button_state == GlobalEnums.UpgradeButtonStates['COMPLETED']:
+	if not button_state == GlobalEnums.UpgradeButtonStates.COMPLETED:
 		if not currency_container:
 			currency_container = CurrencyContainer.new(upgrades[level].price)
 			labels_container.add_child(currency_container)
@@ -60,7 +73,7 @@ func add_completed_label():
 
 func check_level():
 	if level > max_level:
-		button_state = GlobalEnums.UpgradeButtonStates["COMPLETED"]
+		button_state = GlobalEnums.UpgradeButtonStates.COMPLETED
 		button_mask.disabled = true
 		add_completed_label()
 	refresh_button()
@@ -70,27 +83,20 @@ func fill_tooltip():
 	description_label.text = upgrade_description
 	
 
-func try_upgrade(upgrade_data : UpgradeData):
-	for currency in upgrade_data.price:
-		var cost = upgrade_data.price[currency]
-		if GlobalGameStats.currency_data_dictionary[currency].amount_available < cost:
-			on_upgrade_failed()
-			return
-	
-	on_upgrade_succeded()
+func upgrade_failed():
+	GlobalTweens.shake(self, 20, 0.2)
+	GlobalTweens.flash(self, Color.RED, 0.3)
 
-func on_upgrade_failed():
-	modulate = Color.RED
-
-func on_upgrade_succeded():
-	modulate = Color.GREEN
-	Global.upgrade_to_apply.emit(upgrades[level])
+func upgrade_success():
+	GlobalTweens.scale_up_and_down(self,1.1,1,0.2,0.2)
+	GlobalTweens.flash(self, Color.GREEN, 0.3)
+	GlobalSignals.upgrade_to_apply.emit(upgrades[level])
 	level += 1
 	check_level()
 
 func _on_upgrade_button_pressed() -> void:
-	try_upgrade(upgrades[level])
-
+	if button_state != GlobalEnums.UpgradeButtonStates.COMPLETED:
+		upgrade_requested.emit(self)
 
 func _on_upgrade_button_mouse_entered() -> void:
 	tooltip.visible = true
