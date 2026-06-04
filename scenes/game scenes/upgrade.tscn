@@ -17,7 +17,7 @@
 [sub_resource type="Resource" id="Resource_qsj3i"]
 script = ExtResource("6_hf487")
 stats = Dictionary[int, float]({
-3: 5.0
+0: 5.0
 })
 price = Dictionary[int, int]({
 0: 4
@@ -64,6 +64,9 @@ metadata/_custom_type_script = "uid://d3yuxola7qj44"
 
 [sub_resource type="Resource" id="Resource_urtc7"]
 script = ExtResource("6_hf487")
+stats = Dictionary[int, float]({
+4: 5.0
+})
 price = Dictionary[int, int]({
 1: 15
 })
@@ -115,6 +118,7 @@ unfinished_line_gradient = ExtResource("8_hf487")
 
 [node name="UpgradeButtonControl" parent="Control/UpgradeTree" unique_id=1250718661 node_paths=PackedStringArray("next_upgrade_buttons") instance=ExtResource("5_i4ltn")]
 layout_mode = 1
+update_id = "round_duration_1"
 upgrade_name = "Round duration +"
 upgrade_description = "Makes round duration longer"
 upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_qsj3i"), ExtResource("7_qsj3i")])
@@ -125,6 +129,7 @@ texture = SubResource("AtlasTexture_i4ltn")
 layout_mode = 1
 offset_left = -598.0
 offset_right = -332.0
+update_id = "paddle_speed_1"
 upgrade_name = "Paddle speed +"
 upgrade_description = "Makes the paddle faster"
 upgrades = Array[ExtResource("6_hf487")]([ExtResource("7_3scvy")])
@@ -137,6 +142,7 @@ offset_left = -598.0
 offset_top = -590.0
 offset_right = -332.0
 offset_bottom = -326.0
+update_id = "enemies_spawn_rate_1"
 upgrade_name = "Enemies spawn rate +"
 upgrade_description = "Increases number of enemies"
 upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_3scvy")])
@@ -146,6 +152,7 @@ texture = SubResource("AtlasTexture_bwtvb")
 layout_mode = 1
 offset_left = -1082.0
 offset_right = -816.0
+update_id = "money_multipler_1"
 upgrade_name = "Money multiplier +"
 upgrade_description = "Enemies now drop more money"
 upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_bwtvb"), SubResource("Resource_urtc7")])

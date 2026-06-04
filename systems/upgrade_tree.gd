@@ -49,9 +49,9 @@ func _on_button_upgrade_requested(button: UpgradeButtonControl) -> void:
 
 	if _can_afford(current_upgrade_data.price):
 		
-		button.upgrade_success()
-		
 		GlobalSignals.upgrade_to_apply.emit(current_upgrade_data)
+		
+		button.upgrade_success()
 		
 		_unlock_next_nodes(button)
 	else:

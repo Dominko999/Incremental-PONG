@@ -3,6 +3,7 @@ class_name UpgradeButtonControl
 
 signal upgrade_requested(button : UpgradeButtonControl)
 
+@export var update_id : String
 @export var upgrade_name : String
 @export var upgrade_description : String
 @export var upgrades : Array[UpgradeData]
@@ -13,6 +14,7 @@ var level : int = 0
 var max_level : int 
 var button_state : GlobalEnums.UpgradeButtonStates
 var currency_container : CurrencyContainer
+var stat_change_container : StatChangeContainer
 var completed_label : Label
 var is_animating : bool = false
 
@@ -58,15 +60,24 @@ func apply_button_state():
 
 func refresh_button():
 	if not button_state == GlobalEnums.UpgradeButtonStates.COMPLETED:
+		if not stat_change_container:
+			stat_change_container = StatChangeContainer.new(upgrades[level])
+			labels_container.add_child(stat_change_container)
+		else:
+			stat_change_container.upgrade_data = upgrades[level]
+		
 		if not currency_container:
 			currency_container = CurrencyContainer.new(upgrades[level].price)
 			labels_container.add_child(currency_container)
 		else:
-			currency_container.currencies_to_display = upgrades[level].price
+			currency_container.currencies_to_display = upgrades[level].price	
+		
 		fill_tooltip()
 	else:
 		if currency_container:
 			currency_container.queue_free()
+		if stat_change_container:
+			stat_change_container.queue_free()
 
 
 func add_completed_label():
