@@ -14,7 +14,7 @@ var max_level : int
 var button_state : GlobalEnums.UpgradeButtonStates
 var currency_container : CurrencyContainer
 var completed_label : Label
-
+var is_animating : bool = false
 
 @onready var button_mask : Button = %UpgradeButtonMask
 @onready var tooltip : Control = %Tooltip
@@ -93,15 +93,26 @@ func fill_tooltip():
 
 
 func upgrade_failed():
+	if is_animating:
+		return
+	is_animating = true
+	
 	GlobalTweens.shake(self, 20, 0.2)
-	GlobalTweens.flash(self, Color.RED, 0.3)
-
+	await GlobalTweens.flash(self, Color.RED, 0.3)
+	
+	is_animating = false
 
 func upgrade_success():
-	GlobalTweens.scale_up_and_down(self,1.1,1,0.2,0.2)
-	GlobalTweens.flash(self, Color.GREEN, 0.3)
+	if is_animating:
+		return
+	is_animating = true
+	
 	level += 1
 	check_level()
+	GlobalTweens.scale_up_and_down(self,1.1,1,0.2,0.2)
+	await GlobalTweens.flash(self, Color.GREEN, 0.3)
+	
+	is_animating = false
 
 
 func _on_upgrade_button_pressed() -> void:

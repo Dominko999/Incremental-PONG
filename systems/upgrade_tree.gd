@@ -42,7 +42,7 @@ func _gui_input(event: InputEvent) -> void:
 				is_dragging = false
 	elif event is InputEventMouseMotion:
 		if is_dragging:
-			target_position += event.relative / self.scale
+			target_position += event.relative * scale
 
 func _on_button_upgrade_requested(button: UpgradeButtonControl) -> void:
 	var current_upgrade_data = button.upgrades[button.level]

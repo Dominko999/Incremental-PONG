@@ -1,6 +1,8 @@
 extends Node
 class_name HealthComponent
 
+signal on_death()
+
 @export var max_health : int
 @export var health : int = max_health:
 	set(new_health):

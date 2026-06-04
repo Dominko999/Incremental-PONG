@@ -27,6 +27,10 @@ GlobalTweens="*uid://bd2oc50af2nuh"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/rider-plugin/plugin.cfg")
+
 [input]
 
 ui_left={

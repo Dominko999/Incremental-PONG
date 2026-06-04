@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://dv1eh0x7el4p1" path="res://scenes/game scenes/upgrade_button_control.gd" id="2_bwqgq"]
 [ext_resource type="Theme" uid="uid://3xfygpwkt1lg" path="res://small_font_theme.tres" id="6_ylyb0"]
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rudnj"]
+
 [node name="UpgradeButtonControl" type="Control" unique_id=1250718661]
 layout_mode = 3
 anchors_preset = 8
@@ -21,12 +23,14 @@ theme = ExtResource("1_4ngo0")
 script = ExtResource("2_bwqgq")
 upgrade_name = "Name"
 upgrade_description = "Description"
+upgrades = null
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1680885222]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 266.0
+offset_bottom = 266.0
+texture = SubResource("PlaceholderTexture2D_rudnj")
 
 [node name="UpgradeButtonMask" type="Button" parent="TextureRect" unique_id=1387287174]
 unique_name_in_owner = true
