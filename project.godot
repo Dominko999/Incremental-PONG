@@ -21,6 +21,7 @@ GlobalGameStats="*uid://1pgecywyfidp"
 GlobalSignals="*uid://dppci11ihk8ry"
 GlobalEnums="*uid://b4lequudu2560"
 GlobalTweens="*uid://bd2oc50af2nuh"
+GlobalSaveManager="*uid://blc1kt3tes4kv"
 
 [display]
 

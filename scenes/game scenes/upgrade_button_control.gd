@@ -3,14 +3,17 @@ class_name UpgradeButtonControl
 
 signal upgrade_requested(button : UpgradeButtonControl)
 
-@export var update_id : String
+@export var upgrade_id : String
 @export var upgrade_name : String
 @export var upgrade_description : String
 @export var upgrades : Array[UpgradeData]
 @export var next_upgrade_buttons : Array[UpgradeButtonControl]
 @export var texture : Texture
 
-var level : int = 0
+var level : int = 0:
+	set(value):
+		level = value
+		check_level()
 var max_level : int 
 var button_state : GlobalEnums.UpgradeButtonStates
 var currency_container : CurrencyContainer
@@ -59,6 +62,7 @@ func apply_button_state():
 
 
 func refresh_button():
+	apply_button_state()
 	if not button_state == GlobalEnums.UpgradeButtonStates.COMPLETED:
 		if not stat_change_container:
 			stat_change_container = StatChangeContainer.new(upgrades[level])
@@ -90,6 +94,8 @@ func add_completed_label():
 
 
 func check_level():
+	if level > 0:
+		button_state = GlobalEnums.UpgradeButtonStates.UPGRADED
 	if level > max_level:
 		button_state = GlobalEnums.UpgradeButtonStates.COMPLETED
 		button_mask.disabled = true

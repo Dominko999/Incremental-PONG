@@ -1,23 +1,10 @@
 [gd_scene format=3 uid="uid://cf5ydjjeu557f"]
 
+[ext_resource type="Script" uid="uid://c871g2i2phyun" path="res://scenes/game scenes/menu.gd" id="1_51q6v"]
 [ext_resource type="Theme" uid="uid://bvktfcrpfwxtk" path="res://big_font_theme.tres" id="2_51q6v"]
 
-[sub_resource type="GDScript" id="GDScript_fddlp"]
-script/source = "extends Scene
-
-@export var gameplay_scene : PackedScene
-
-
-
-func _on_play_button_button_down() -> void:
-	GlobalSignals.transition_to_upgrade.emit()
-
-func _on_quit_button_button_down() -> void:
-	get_tree().quit()
-"
-
 [node name="menu" type="Node2D" unique_id=935068314]
-script = SubResource("GDScript_fddlp")
+script = ExtResource("1_51q6v")
 
 [node name="Control" type="Control" parent="." unique_id=153617434]
 layout_mode = 3
@@ -41,13 +28,29 @@ offset_right = 21.0
 offset_bottom = 66.0
 grow_horizontal = 2
 
-[node name="PlayButton" type="Button" parent="Control/VBoxContainer" unique_id=1923599749]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=2014612264]
 layout_mode = 2
-text = "Play"
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="ContinueButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=1923599749]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+text = "Continue"
+
+[node name="NewGameButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=115899233]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+text = "New game"
 
 [node name="QuitButton" type="Button" parent="Control/VBoxContainer" unique_id=1574174661]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Quit"
 
-[connection signal="button_down" from="Control/VBoxContainer/PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_down" from="Control/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_continue_button_button_down"]
+[connection signal="button_down" from="Control/VBoxContainer/HBoxContainer/NewGameButton" to="." method="_on_new_game_button_button_down"]
 [connection signal="button_down" from="Control/VBoxContainer/QuitButton" to="." method="_on_quit_button_button_down"]

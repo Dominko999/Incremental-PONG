@@ -15,11 +15,31 @@ func _ready() -> void:
 	for child in get_children():
 		if child is UpgradeButtonControl:
 			child.upgrade_requested.connect(_on_button_upgrade_requested)
-			child.set_state(GlobalEnums.UpgradeButtonStates.HIDDEN)
+			
+			if GlobalSaveManager.save_file:
+				var saved_level = GlobalSaveManager.save_file.upgrade_levels.get(child.upgrade_id)
+				
+				if saved_level != null:
+					child.level = GlobalSaveManager.save_file.upgrade_levels[child.upgrade_id]
+					if child.level != 0:
+						_unlock_next_nodes(child)
+						show_unfinished_lines(child)
+				else:
+					child.set_state(GlobalEnums.UpgradeButtonStates.HIDDEN)
+			
 
 	for button in starting_buttons:
 		button.set_state(GlobalEnums.UpgradeButtonStates.NOT_UPGRADED)
 		show_unfinished_lines(button)
+
+
+func save_button_levels() -> void:
+	var upgrade_levels_dict : Dictionary = {}
+	
+	for child in get_children():
+		if child is UpgradeButtonControl:
+			upgrade_levels_dict[child.upgrade_id] = child.level
+	GlobalSaveManager.save_file.upgrade_levels = upgrade_levels_dict
 
 
 func _process(delta : float) -> void:
@@ -44,6 +64,7 @@ func _gui_input(event: InputEvent) -> void:
 		if is_dragging:
 			target_position += event.relative * scale
 
+
 func _on_button_upgrade_requested(button: UpgradeButtonControl) -> void:
 	var current_upgrade_data = button.upgrades[button.level]
 
@@ -54,6 +75,8 @@ func _on_button_upgrade_requested(button: UpgradeButtonControl) -> void:
 		button.upgrade_success()
 		
 		_unlock_next_nodes(button)
+		
+		save_button_levels()
 	else:
 		button.upgrade_failed()
 
