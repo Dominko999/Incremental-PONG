@@ -62,6 +62,7 @@ animations = [{
 scale = Vector2(2, 2)
 collision_layer = 32
 script = ExtResource("1_yyfgy")
+speed = 400.0
 currency_rewards = Array[ExtResource("2_p1gbo")]([ExtResource("3_ihhsj")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=255600997]

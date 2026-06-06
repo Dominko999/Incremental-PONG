@@ -7,7 +7,6 @@ var current_scene : Node
 @export var upgrade_scene : PackedScene
 
 
-
 func _ready() -> void:
 	load_scene(menu_scene)
 	GlobalSignals.transition_to_gameplay.connect(load_scene.bind(gameplay_scene))

@@ -26,12 +26,11 @@ var is_animating : bool = false
 @onready var name_label : Label = %UpgradeNameLabel
 @onready var description_label : Label = %UpgradeDescriptionLabel
 @onready var labels_container : VBoxContainer = %LabelsContainer
-@onready var texture_rect : TextureRect = %TextureRect
 
 
 func _ready() -> void:
 	button_state = GlobalEnums.UpgradeButtonStates.NOT_UPGRADED
-	texture_rect.texture = texture
+	button_mask.icon = texture
 	max_level = len(upgrades) - 1
 	tooltip.visible = false
 	refresh_button()

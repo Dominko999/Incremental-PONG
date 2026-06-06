@@ -6,7 +6,47 @@
 [ext_resource type="Script" uid="uid://dbnu8jdm0ukv2" path="res://scenes/instances/gameplay/spawner.gd" id="4_urrcd"]
 [ext_resource type="PackedScene" uid="uid://b4s4vsu3dpd5g" path="res://scenes/instances/collectibles/small_wisp.tscn" id="5_puebw"]
 [ext_resource type="Script" uid="uid://bclkxb2jnterm" path="res://systems/progress_bar.gd" id="6_8stqr"]
-[ext_resource type="Theme" uid="uid://bvktfcrpfwxtk" path="res://big_font_theme.tres" id="6_l8uv0"]
+[ext_resource type="Theme" uid="uid://bvktfcrpfwxtk" path="res://data/fonts/big_font_theme.tres" id="6_l8uv0"]
+
+[sub_resource type="Shader" id="Shader_l8uv0"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+// W CanvasGroup musimy czytać z backbufora ekranu, żeby zachować logikę tego węzła
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+
+uniform vec2 shadow_offset = vec2(4.0, 4.0);
+uniform vec4 shadow_color : source_color = vec4(0.0, 0.0, 0.0, 0.5);
+
+void fragment() {
+    // 1. Pobieramy zbuforowany obraz grupy z ekranu
+    vec4 col = textureLod(screen_texture, SCREEN_UV, 0.0);
+    
+    // Wbudowany mechanizm CanvasGroup używa pre-multiplied alpha, więc to cofamy
+    if (col.a > 0.0001) {
+        col.rgb /= col.a;
+    }
+
+    // 2. Przesuwamy koordynaty, żeby stworzyć maskę dla naszego cienia
+    vec2 ps = SCREEN_PIXEL_SIZE;
+    vec4 shadow_mask = textureLod(screen_texture, SCREEN_UV - shadow_offset * ps, 0.0);
+    
+    // 3. Obliczamy kolor cienia z odpowiednią przezroczystością maski
+    vec4 shadow = shadow_color;
+    shadow.a *= shadow_mask.a;
+
+    // 4. Mieszamy: najpierw rysujemy cień, a na to nakładamy właściwe obiekty
+    vec4 final_color = mix(shadow, col, col.a);
+
+    // Przekazujemy ostateczny wynik
+    COLOR *= final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o7h44"]
+shader = SubResource("Shader_l8uv0")
+shader_parameter/shadow_offset = Vector2(5, 5)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.5882353)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(1920, 30)
@@ -29,41 +69,44 @@ size = Vector2(30, 980)
 [node name="gameplay" type="Node2D" unique_id=979873657]
 script = ExtResource("1_r8bcl")
 
-[node name="PlayerPaddle" parent="." unique_id=1418855030 groups=["currency_collector", "paddles"] instance=ExtResource("2_rlidi")]
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=569312905]
+material = SubResource("ShaderMaterial_o7h44")
+
+[node name="PlayerPaddle" parent="CanvasGroup" unique_id=1418855030 groups=["currency_collector", "paddles"] instance=ExtResource("2_rlidi")]
 unique_name_in_owner = true
 position = Vector2(-900, 0)
 scale = Vector2(2, 2)
 collision_mask = 33
 
-[node name="walls" type="StaticBody2D" parent="." unique_id=127075650 groups=["walls"]]
+[node name="walls" type="StaticBody2D" parent="CanvasGroup" unique_id=127075650 groups=["walls"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="walls" unique_id=1259832105]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasGroup/walls" unique_id=1259832105]
 position = Vector2(0, -540)
 shape = SubResource("RectangleShape2D_lbhrr")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls" unique_id=1157535041]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasGroup/walls" unique_id=1157535041]
 position = Vector2(0, 540)
 shape = SubResource("RectangleShape2D_ebmjs")
 
-[node name="left_edge" type="StaticBody2D" parent="." unique_id=381340775 groups=["left_edge"]]
+[node name="left_edge" type="StaticBody2D" parent="CanvasGroup" unique_id=381340775 groups=["left_edge"]]
 position = Vector2(-960, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="left_edge" unique_id=213149161 groups=["left_edge"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasGroup/left_edge" unique_id=213149161 groups=["left_edge"]]
 shape = SubResource("RectangleShape2D_yqjtg")
 
-[node name="right_edge" type="StaticBody2D" parent="." unique_id=1411896212 groups=["walls"]]
+[node name="right_edge" type="StaticBody2D" parent="CanvasGroup" unique_id=1411896212 groups=["walls"]]
 position = Vector2(960, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="right_edge" unique_id=2060370747 groups=["walls"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasGroup/right_edge" unique_id=2060370747 groups=["walls"]]
 shape = SubResource("RectangleShape2D_lnu2h")
 
-[node name="projectiles_parent" type="Node2D" parent="." unique_id=1828366239 groups=["projectiles_parent"]]
+[node name="projectiles_parent" type="Node2D" parent="CanvasGroup" unique_id=1828366239 groups=["projectiles_parent"]]
 
-[node name="enemies_parent" type="Node2D" parent="." unique_id=1320774565 groups=["enemies_parent"]]
+[node name="enemies_parent" type="Node2D" parent="CanvasGroup" unique_id=1320774565 groups=["enemies_parent"]]
 
-[node name="collectibles_parent" type="Node2D" parent="." unique_id=1020216484 groups=["collectibles_parent"]]
+[node name="collectibles_parent" type="Node2D" parent="CanvasGroup" unique_id=1020216484 groups=["collectibles_parent"]]
 
-[node name="EnemySpawner" type="Area2D" parent="." unique_id=1497105297 node_paths=PackedStringArray("spawn_area_shape")]
+[node name="EnemySpawner" type="Area2D" parent="CanvasGroup" unique_id=1497105297 node_paths=PackedStringArray("spawn_area_shape")]
 unique_name_in_owner = true
 position = Vector2(1020, 0)
 script = ExtResource("4_urrcd")
@@ -74,10 +117,10 @@ treshold_range = Vector2(3, 6)
 spawn_in_child_collision_shape = true
 spawn_area_shape = NodePath("EnemySpawnArea")
 
-[node name="EnemySpawnArea" type="CollisionShape2D" parent="EnemySpawner" unique_id=1435744100]
+[node name="EnemySpawnArea" type="CollisionShape2D" parent="CanvasGroup/EnemySpawner" unique_id=1435744100]
 shape = SubResource("RectangleShape2D_wowpa")
 
-[node name="SmallWispSpawner" type="Area2D" parent="." unique_id=817658398 node_paths=PackedStringArray("spawn_area_shape")]
+[node name="SmallWispSpawner" type="Area2D" parent="CanvasGroup" unique_id=817658398 node_paths=PackedStringArray("spawn_area_shape")]
 unique_name_in_owner = true
 position = Vector2(990, 0)
 script = ExtResource("4_urrcd")
@@ -88,7 +131,7 @@ spawn_in_child_collision_shape = true
 spawn_area_shape = NodePath("SmallWispSpawnArea")
 metadata/_custom_type_script = "uid://dbnu8jdm0ukv2"
 
-[node name="SmallWispSpawnArea" type="CollisionShape2D" parent="SmallWispSpawner" unique_id=431576649]
+[node name="SmallWispSpawnArea" type="CollisionShape2D" parent="CanvasGroup/SmallWispSpawner" unique_id=431576649]
 shape = SubResource("RectangleShape2D_i6g32")
 
 [node name="UI" type="Control" parent="." unique_id=1336958336]
@@ -105,7 +148,8 @@ theme = ExtResource("6_l8uv0")
 [node name="RoundDurationBar" type="ProgressBar" parent="UI" unique_id=596403656]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 863.0
-offset_bottom = 88.0
+offset_right = 300.0
+offset_bottom = 40.0
+value = 18.78
 show_percentage = false
 script = ExtResource("6_8stqr")

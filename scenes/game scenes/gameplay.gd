@@ -14,6 +14,7 @@ func _ready() -> void:
 	var round_duration = GlobalGameStats.round_duration.end_value
 	round_duration_bar.max_value = round_duration
 	round_duration_bar.value = round_duration
+	round_duration_bar.size.x = GlobalGameStats.round_duration.end_value * round_duration_bar.x_size_multiplier
 	round_time_remaining = round_duration
 	
 	

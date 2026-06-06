@@ -51,7 +51,10 @@ func _update_display():
 func add_currency_row(currency_data, amount):
 	var container = HBoxContainer.new()
 	container.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	container.alignment = BoxContainer.ALIGNMENT_CENTER
+	if is_player_currency_display:
+		container.alignment = BoxContainer.ALIGNMENT_BEGIN
+	else:
+		container.alignment = BoxContainer.ALIGNMENT_CENTER
 	var label = Label.new()
 	var icon_rect = TextureRect.new()
 	icon_rect.texture = currency_data.icon # currency_data.icon is a texture2D
@@ -62,6 +65,7 @@ func add_currency_row(currency_data, amount):
 	icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon_rect.custom_minimum_size = Vector2(32, 32) 
 	icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	
 	
 	label.text = str(amount)
 	add_child(container)

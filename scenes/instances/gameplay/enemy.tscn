@@ -4,7 +4,9 @@
 [ext_resource type="Script" uid="uid://bfa7ljh3txd0v" path="res://scenes/instances/gameplay/enemy.gd" id="1_md0e3"]
 [ext_resource type="PackedScene" uid="uid://nw8trwg3m77e" path="res://scenes/components/health_component.tscn" id="2_5uy6h"]
 [ext_resource type="PackedScene" uid="uid://c4lpa6lj4f3i2" path="res://scenes/components/hurtbox_component.tscn" id="3_5uy6h"]
+[ext_resource type="Resource" uid="uid://c7pjye0w1ibga" path="res://currency/red_currency_data.tres" id="4_sxmwv"]
 [ext_resource type="PackedScene" uid="uid://ct5wsomtivuq8" path="res://scenes/components/shooter_component.tscn" id="5_7v0ic"]
+[ext_resource type="Script" uid="uid://cu5s10566rprs" path="res://scenes/instances/collectibles/currency_reward.gd" id="5_fay2h"]
 [ext_resource type="Script" uid="uid://j3gmm1nhrmy2" path="res://scenes/states/state_machine.gd" id="6_v7ugw"]
 [ext_resource type="Script" uid="uid://bkplay2jlppyi" path="res://scenes/states/spawned_state.gd" id="7_sit3b"]
 [ext_resource type="Script" uid="uid://bhphter5pcjc0" path="res://scenes/states/patrol_state.gd" id="8_7v0ic"]
@@ -23,6 +25,12 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_md0e3"]
 radius = 14.0
 height = 34.0
+
+[sub_resource type="Resource" id="Resource_oi6m7"]
+script = ExtResource("5_fay2h")
+currency = ExtResource("4_sxmwv")
+amount = 2
+metadata/_custom_type_script = "uid://cu5s10566rprs"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5uy6h"]
 radius = 15.0
@@ -44,6 +52,7 @@ shape = SubResource("CapsuleShape2D_md0e3")
 
 [node name="HealthComponent" parent="." unique_id=768647454 instance=ExtResource("2_5uy6h")]
 max_health = 1
+death_reward = SubResource("Resource_oi6m7")
 
 [node name="HurtboxComponent" parent="." unique_id=1695061849 node_paths=PackedStringArray("health_component") instance=ExtResource("3_5uy6h")]
 health_component = NodePath("../HealthComponent")

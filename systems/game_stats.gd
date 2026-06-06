@@ -56,6 +56,13 @@ func load_stats() -> void:
 		stat_obj.base_value = data.get("base", stat_obj.base_value)
 		stat_obj.multiplier = data.get("mult", stat_obj.multiplier)
 
+
+func purge_stats() -> void:
+	for stat_type in stats_map:
+		stats_map[stat_type].reset()
+	save_stats()
+
+
 func save_currency() -> void:
 	if not GlobalSaveManager.save_file:
 		return
@@ -72,20 +79,26 @@ func save_currency() -> void:
 
 func load_currency() -> void:
 	if not GlobalSaveManager.save_file:
-		print("SHIT")
 		return
 	var save_data = GlobalSaveManager.save_file.currency_data
 	for type in save_data:
 		if currency_data_dictionary.has(type):
-			print(save_data[type].amount_available)
-			print(save_data[type].total_amount_collected)
 			currency_data_dictionary[type].amount_available = save_data[type].amount_available
 			currency_data_dictionary[type].total_amount_collected = save_data[type].total_amount_collected
 
 
+func purge_currency() -> void:
+	for type in currency_data_dictionary:
+		if currency_data_dictionary.has(type):
+			currency_data_dictionary[type].amount_available = 0
+			currency_data_dictionary[type].total_amount_collected = 0
+	save_currency()
+
+
 func add_currency(currency : CurrencyData, amount : int):
-	currency_data_dictionary[currency.type].amount_available += amount
-	GlobalSignals.emit_signal("currency_changed", currency.type, amount)
+	var currency_to_add = round(amount * money_multiplier.end_value)
+	currency_data_dictionary[currency.type].amount_available += currency_to_add
+	GlobalSignals.emit_signal("currency_changed", currency.type, currency_to_add)
 	save_currency()
 
 

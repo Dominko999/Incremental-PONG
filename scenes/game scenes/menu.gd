@@ -18,6 +18,8 @@ func _on_continue_button_button_down() -> void:
 	GlobalSignals.transition_to_upgrade.emit()
 
 func _on_new_game_button_button_down() -> void:
+	GlobalGameStats.purge_currency()
+	GlobalGameStats.purge_stats()
 	GlobalSaveManager.create_new_save()
 	GlobalSignals.transition_to_upgrade.emit()
 
