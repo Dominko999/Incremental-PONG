@@ -10,6 +10,9 @@ signal upgrade_requested(button : UpgradeButtonControl)
 @export var next_upgrade_buttons : Array[UpgradeButtonControl]
 @export var texture : Texture
 
+@export var full_level_panel_theme : StyleBoxFlat
+@export var empty_level_panel_theme : StyleBoxFlat
+
 var level : int = 0:
 	set(value):
 		level = value
@@ -26,6 +29,7 @@ var is_animating : bool = false
 @onready var name_label : Label = %UpgradeNameLabel
 @onready var description_label : Label = %UpgradeDescriptionLabel
 @onready var labels_container : VBoxContainer = %LabelsContainer
+@onready var level_container : HBoxContainer = %LevelHBoxContainer
 
 
 func _ready() -> void:
@@ -67,6 +71,7 @@ func refresh_button():
 			currency_container.queue_free()
 		if stat_change_container:
 			stat_change_container.queue_free()
+		update_level_container()
 		return
 		
 	if not stat_change_container:
@@ -81,8 +86,8 @@ func refresh_button():
 	else:
 		currency_container.currencies_to_display = upgrades[level].price
 		
-		fill_tooltip()
-		
+	fill_tooltip()
+	update_level_container()
 
 
 func add_completed_label():
@@ -91,7 +96,6 @@ func add_completed_label():
 		completed_label.text = "COMPLETED"
 		completed_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		labels_container.add_child(completed_label)
-		
 
 
 func check_level():
@@ -102,6 +106,23 @@ func check_level():
 		button_mask.disabled = true
 		add_completed_label()
 	refresh_button()
+
+
+func update_level_container() -> void:
+	for child in level_container.get_children():
+		child.queue_free()
+	
+	for i in range(0, level):
+		var full_panel = PanelContainer.new()
+		full_panel.add_theme_stylebox_override("panel", full_level_panel_theme)
+		full_panel.custom_minimum_size = Vector2(30.0, 30.0)
+		level_container.add_child(full_panel)
+	
+	for i in range(level, max_level + 1):
+		var empty_panel = PanelContainer.new()
+		empty_panel.add_theme_stylebox_override("panel", empty_level_panel_theme)
+		empty_panel.custom_minimum_size = Vector2(30.0, 30.0)
+		level_container.add_child(empty_panel)
 
 
 func fill_tooltip():

@@ -4,9 +4,21 @@
 [ext_resource type="Script" uid="uid://dv1eh0x7el4p1" path="res://scenes/game scenes/upgrade_button_control.gd" id="2_bwqgq"]
 [ext_resource type="Texture2D" uid="uid://cdg0dpuun0hnc" path="res://data/enemy_placeholder.png" id="3_1et3g"]
 [ext_resource type="Theme" uid="uid://b2l8qk58axwo5" path="res://data/fonts/medium_font_theme.tres" id="3_kxfwh"]
+[ext_resource type="StyleBox" uid="uid://cbgm8r2wfr41" path="res://data/fonts/empty_level_panel.tres" id="6_popud"]
 [ext_resource type="Theme" uid="uid://3xfygpwkt1lg" path="res://data/fonts/small_font_theme.tres" id="6_ylyb0"]
+[ext_resource type="StyleBox" uid="uid://c2idqiw8nebjv" path="res://data/fonts/full_level_panel.tres" id="7_npm05"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_d3vy5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4b68g"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.28275636, 0.2827564, 0.2827564, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="UpgradeButtonControl" type="Control" unique_id=1250718661]
 layout_mode = 3
@@ -25,6 +37,8 @@ theme = ExtResource("1_4ngo0")
 script = ExtResource("2_bwqgq")
 upgrade_name = "Name"
 upgrade_description = "Description"
+full_level_panel_theme = ExtResource("7_npm05")
+empty_level_panel_theme = ExtResource("6_popud")
 
 [node name="UpgradeButtonMask" type="Button" parent="." unique_id=1387287174]
 unique_name_in_owner = true
@@ -41,14 +55,6 @@ size_flags_vertical = 4
 icon = ExtResource("3_1et3g")
 icon_alignment = 1
 expand_icon = true
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1680885222]
-unique_name_in_owner = true
-visible = false
-layout_mode = 0
-offset_right = 266.0
-offset_bottom = 266.0
-texture = SubResource("CanvasTexture_d3vy5")
 
 [node name="Tooltip" type="PanelContainer" parent="." unique_id=296321588]
 unique_name_in_owner = true
@@ -92,6 +98,43 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("6_ylyb0")
 text = "Description"
+
+[node name="LevelContainer" type="PanelContainer" parent="." unique_id=624416089]
+z_index = 2
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -31.0
+offset_right = 24.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4b68g")
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelContainer" unique_id=730084449]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="LevelHBoxContainer" type="HBoxContainer" parent="LevelContainer/MarginContainer" unique_id=1707422035]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="LevelContainer/MarginContainer/LevelHBoxContainer" unique_id=1907253939]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_npm05")
+
+[node name="PanelContainer" type="PanelContainer" parent="LevelContainer/MarginContainer/LevelHBoxContainer" unique_id=248018308]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("6_popud")
 
 [connection signal="mouse_entered" from="UpgradeButtonMask" to="." method="_on_upgrade_button_mouse_entered"]
 [connection signal="mouse_exited" from="UpgradeButtonMask" to="." method="_on_upgrade_button_mouse_exited"]
