@@ -7,6 +7,7 @@ var is_dragging : bool = false
 var target_position : Vector2
 var target_scale : Vector2
 
+
 func _ready() -> void:
 	target_position = position
 	target_scale = scale
@@ -34,7 +35,7 @@ func _ready() -> void:
 
 func save_button_levels() -> void:
 	var upgrade_levels_dict : Dictionary = {}
-	
+
 	for child in get_children():
 		if child is UpgradeButtonControl:
 			upgrade_levels_dict[child.upgrade_id] = child.level
@@ -47,7 +48,7 @@ func _process(delta : float) -> void:
 		target_scale *= Vector2(0.9, 0.9)
 	elif Input.is_action_just_pressed("ui_zoom_in"):
 		target_scale *= Vector2(1.1, 1.1)
-	
+
 	scale = scale.lerp(target_scale, 15.0 * delta)
 	position = position.lerp(target_position, 15.0 * delta)
 
@@ -68,13 +69,15 @@ func _on_button_upgrade_requested(button: UpgradeButtonControl) -> void:
 	var current_upgrade_data = button.upgrades[button.level]
 
 	if _can_afford(current_upgrade_data.price):
-		
+
 		GlobalSignals.upgrade_to_apply.emit(current_upgrade_data)
-		
+
 		button.upgrade_success()
-		
+
 		_unlock_next_nodes(button)
 		
+		refresh_tooltips()
+
 		save_button_levels()
 	else:
 		button.upgrade_failed()
@@ -114,3 +117,8 @@ func show_unfinished_lines(button : UpgradeButtonControl):
 		unfinished_line.z_index = -1
 		unfinished_line.gradient = unfinished_line_gradient
 		add_child(unfinished_line)
+
+func refresh_tooltips() -> void:
+	for child in get_children():
+		if child is UpgradeButtonControl:
+			child.refresh_button()

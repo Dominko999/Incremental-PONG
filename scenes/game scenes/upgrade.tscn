@@ -138,6 +138,66 @@ metadata/_custom_type_script = "uid://d3yuxola7qj44"
 atlas = ExtResource("8_bwtvb")
 region = Rect2(32, 0, 16, 16)
 
+[sub_resource type="Resource" id="Resource_acx6j"]
+script = ExtResource("6_hf487")
+stats = Dictionary[int, float]({
+0: 5.0
+})
+price = Dictionary[int, int]({
+0: 20
+})
+metadata/_custom_type_script = "uid://d3yuxola7qj44"
+
+[sub_resource type="Resource" id="Resource_imv18"]
+script = ExtResource("6_hf487")
+stats = Dictionary[int, float]({
+0: 5.0
+})
+price = Dictionary[int, int]({
+0: 30
+})
+metadata/_custom_type_script = "uid://d3yuxola7qj44"
+
+[sub_resource type="Resource" id="Resource_s8824"]
+script = ExtResource("6_hf487")
+stats = Dictionary[int, float]({
+0: 5.0
+})
+price = Dictionary[int, int]({
+0: 50
+})
+metadata/_custom_type_script = "uid://d3yuxola7qj44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evx8e"]
+atlas = ExtResource("8_bwtvb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_es8gc"]
+script = ExtResource("6_hf487")
+stats = Dictionary[int, float]({
+4: 1.0
+})
+price = Dictionary[int, int]({
+0: 70,
+1: 15
+})
+metadata/_custom_type_script = "uid://d3yuxola7qj44"
+
+[sub_resource type="Resource" id="Resource_b8020"]
+script = ExtResource("6_hf487")
+stats = Dictionary[int, float]({
+4: 1.0
+})
+price = Dictionary[int, int]({
+0: 80,
+1: 30
+})
+metadata/_custom_type_script = "uid://d3yuxola7qj44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsdxg"]
+atlas = ExtResource("8_bwtvb")
+region = Rect2(64, 0, 16, 16)
+
 [node name="Upgrade" type="Node2D" unique_id=306167025]
 script = ExtResource("1_if82p")
 
@@ -237,7 +297,7 @@ upgrade_id = "enemies_spawn_rate_2"
 upgrade_name = "Enemies spawn rate +"
 upgrade_description = "Slightly increases number of enemies"
 upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_rh4km"), SubResource("Resource_evx8e"), SubResource("Resource_rsdxg")])
-next_upgrade_buttons = [NodePath("../UpgradeButtonControl6")]
+next_upgrade_buttons = [NodePath("../UpgradeButtonControl6"), NodePath("../UpgradeButtonControl7")]
 texture = SubResource("AtlasTexture_v3djm")
 
 [node name="UpgradeButtonControl6" parent="Control/UpgradeTree" unique_id=1304758001 instance=ExtResource("5_i4ltn")]
@@ -252,8 +312,32 @@ upgrade_description = "Makes the paddle significantly faster"
 upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_fqsgh"), SubResource("Resource_mr7p7")])
 texture = SubResource("AtlasTexture_acx6j")
 
+[node name="UpgradeButtonControl7" parent="Control/UpgradeTree" unique_id=1800489259 node_paths=PackedStringArray("next_upgrade_buttons") instance=ExtResource("5_i4ltn")]
+layout_mode = 1
+offset_left = 1002.0
+offset_top = -100.0
+offset_right = 1268.0
+offset_bottom = 164.0
+upgrade_id = "round_duration_2"
+upgrade_name = "Round duration ++"
+upgrade_description = "Makes round duration longer"
+upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_acx6j"), SubResource("Resource_imv18"), SubResource("Resource_s8824")])
+next_upgrade_buttons = [NodePath("../UpgradeButtonControl8")]
+texture = SubResource("AtlasTexture_evx8e")
+
+[node name="UpgradeButtonControl8" parent="Control/UpgradeTree" unique_id=331822945 instance=ExtResource("5_i4ltn")]
+layout_mode = 1
+offset_left = 1002.0
+offset_top = -700.0
+offset_right = 1268.0
+offset_bottom = -436.0
+upgrade_id = "money_multipler_2"
+upgrade_name = "Money multiplier ++"
+upgrade_description = "Enemies now drop significantly more money"
+upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_es8gc"), SubResource("Resource_b8020")])
+texture = SubResource("AtlasTexture_rsdxg")
+
 [node name="GoToMenuContainer" type="VBoxContainer" parent="Control" unique_id=1219487047]
-visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -267,7 +351,6 @@ layout_mode = 2
 text = "Go to menu"
 
 [node name="PlayButtonContainer" type="VBoxContainer" parent="Control" unique_id=1756686758]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
