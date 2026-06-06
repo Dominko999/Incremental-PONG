@@ -142,4 +142,5 @@ character = NodePath("../..")
 unique_name_in_owner = true
 script = ExtResource("5_4a3w8")
 character = NodePath("../..")
-attack_distance = 75.0
+attack_speed = 611.87
+attack_distance = 200.0

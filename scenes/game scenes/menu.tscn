@@ -76,6 +76,8 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 200
 text = "INCREMENTAL PONG"
 
-[connection signal="button_down" from="CanvasGroup/Control/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_continue_button_button_down"]
+[connection signal="pressed" from="CanvasGroup/Control/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="button_down" from="CanvasGroup/Control/VBoxContainer/HBoxContainer/NewGameButton" to="." method="_on_new_game_button_button_down"]
+[connection signal="pressed" from="CanvasGroup/Control/VBoxContainer/HBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="button_down" from="CanvasGroup/Control/VBoxContainer/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="pressed" from="CanvasGroup/Control/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

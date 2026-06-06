@@ -2,7 +2,7 @@ extends Area2D
 class_name Spawner
 
 @export var scene_to_spawn : PackedScene
-@export var spawn_rate_modifier_name : String
+@export var max_amount_of_scenes_spawned : int = 100
 @export var parent_node_name : String
 
 var spawn_timer : float = 0.0
@@ -35,7 +35,9 @@ func _process(delta: float) -> void:
 	if spawn_timer >= treshold:
 		randomize_treshold()
 		spawn_timer = 0
-		spawn_enemy()
+		if max_amount_of_scenes_spawned:
+			if  parent_node.get_child_count() < max_amount_of_scenes_spawned:
+				spawn_enemy()
 
 func randomize_treshold():
 	treshold = randf_range(treshold_range.x,treshold_range.y)

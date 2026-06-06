@@ -18,3 +18,8 @@ signal save_file_changed
 	set(value):
 		upgrade_levels = value
 		save_file_changed.emit()
+# Store unlocked abilities: {GlobalEnums.Abilities.DASH : True}
+@export var unlocked_abilities : Dictionary = {}:
+	set(value):
+		unlocked_abilities = value
+		save_file_changed.emit()

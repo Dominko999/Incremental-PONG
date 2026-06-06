@@ -198,6 +198,30 @@ metadata/_custom_type_script = "uid://d3yuxola7qj44"
 atlas = ExtResource("8_bwtvb")
 region = Rect2(64, 0, 16, 16)
 
+[sub_resource type="Resource" id="Resource_w4fn7"]
+script = ExtResource("6_hf487")
+price = Dictionary[int, int]({
+0: 50
+})
+ability_to_unlock = 0
+metadata/_custom_type_script = "uid://d3yuxola7qj44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e56nw"]
+atlas = ExtResource("8_bwtvb")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_e56nw"]
+script = ExtResource("6_hf487")
+price = Dictionary[int, int]({
+0: 60
+})
+ability_to_unlock = 1
+metadata/_custom_type_script = "uid://d3yuxola7qj44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx207"]
+atlas = ExtResource("8_bwtvb")
+region = Rect2(80, 0, 16, 16)
+
 [node name="Upgrade" type="Node2D" unique_id=306167025]
 script = ExtResource("1_if82p")
 
@@ -246,7 +270,7 @@ upgrade_id = "round_duration_1"
 upgrade_name = "Round duration +"
 upgrade_description = "Makes round duration longer"
 upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_qsj3i"), ExtResource("7_qsj3i")])
-next_upgrade_buttons = [NodePath("../UpgradeButtonControl2"), NodePath("../UpgradeButtonControl5")]
+next_upgrade_buttons = [NodePath("../UpgradeButtonControl2"), NodePath("../UpgradeButtonControl5"), NodePath("../UpgradeButtonControl10")]
 texture = SubResource("AtlasTexture_urtc7")
 
 [node name="UpgradeButtonControl2" parent="Control/UpgradeTree" unique_id=182617067 node_paths=PackedStringArray("next_upgrade_buttons") instance=ExtResource("5_i4ltn")]
@@ -322,7 +346,7 @@ upgrade_id = "round_duration_2"
 upgrade_name = "Round duration ++"
 upgrade_description = "Makes round duration longer"
 upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_acx6j"), SubResource("Resource_imv18"), SubResource("Resource_s8824")])
-next_upgrade_buttons = [NodePath("../UpgradeButtonControl8")]
+next_upgrade_buttons = [NodePath("../UpgradeButtonControl8"), NodePath("../UpgradeButtonControl9")]
 texture = SubResource("AtlasTexture_evx8e")
 
 [node name="UpgradeButtonControl8" parent="Control/UpgradeTree" unique_id=331822945 instance=ExtResource("5_i4ltn")]
@@ -337,7 +361,32 @@ upgrade_description = "Enemies now drop significantly more money"
 upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_es8gc"), SubResource("Resource_b8020")])
 texture = SubResource("AtlasTexture_rsdxg")
 
+[node name="UpgradeButtonControl9" parent="Control/UpgradeTree" unique_id=1570498961 instance=ExtResource("5_i4ltn")]
+layout_mode = 1
+offset_left = 1502.0
+offset_top = -100.0
+offset_right = 1768.0
+offset_bottom = 164.0
+upgrade_id = "dash"
+upgrade_name = "Dash"
+upgrade_description = "Grants you the ability to dash using [Space]"
+upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_w4fn7")])
+texture = SubResource("AtlasTexture_e56nw")
+
+[node name="UpgradeButtonControl10" parent="Control/UpgradeTree" unique_id=288995564 instance=ExtResource("5_i4ltn")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = -700.0
+offset_right = 268.0
+offset_bottom = -436.0
+upgrade_id = "unlock_enemies"
+upgrade_name = "Unlock Enemies"
+upgrade_description = "Unlocks enemies, that when defeated give you red currency"
+upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_e56nw")])
+texture = SubResource("AtlasTexture_vx207")
+
 [node name="GoToMenuContainer" type="VBoxContainer" parent="Control" unique_id=1219487047]
+z_index = 3
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -351,6 +400,7 @@ layout_mode = 2
 text = "Go to menu"
 
 [node name="PlayButtonContainer" type="VBoxContainer" parent="Control" unique_id=1756686758]
+z_index = 3
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -368,6 +418,7 @@ text = "Play PONG"
 
 [node name="CurrencyContainer" type="VBoxContainer" parent="Control" unique_id=351435239]
 unique_name_in_owner = true
+z_index = 3
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -377,6 +428,7 @@ metadata/_custom_type_script = "uid://beq0lhg4rne4t"
 
 [node name="DebugMenuContainer" type="PanelContainer" parent="Control" unique_id=2049097078]
 visible = false
+z_index = 3
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0

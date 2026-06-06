@@ -30,7 +30,8 @@ var is_animating : bool = false
 @onready var description_label : Label = %UpgradeDescriptionLabel
 @onready var labels_container : VBoxContainer = %LabelsContainer
 @onready var level_container : HBoxContainer = %LevelHBoxContainer
-
+@onready var click_successfull_audio_player : AudioStreamPlayer = %ClickSuccessfullAudioPlayer
+@onready var click_failed_audio_player : AudioStreamPlayer = %ClickFailedAudioPlayer
 
 func _ready() -> void:
 	button_state = GlobalEnums.UpgradeButtonStates.NOT_UPGRADED
@@ -128,23 +129,29 @@ func update_level_container() -> void:
 func fill_tooltip():
 	name_label.text = upgrade_name
 	description_label.text = upgrade_description
-	
 
 
-func upgrade_failed():
+func upgrade_failed():	
 	if is_animating:
 		return
 	is_animating = true
+	
+	if not click_failed_audio_player.playing:
+		click_failed_audio_player.play()
 	
 	GlobalTweens.shake(self, 20, 0.2)
 	await GlobalTweens.flash(self, Color.RED, 0.3)
 	
 	is_animating = false
 
+
 func upgrade_success():
 	if is_animating:
 		return
 	is_animating = true
+	
+	if not click_successfull_audio_player.playing:
+		click_successfull_audio_player.play()
 	
 	level += 1
 	check_level()
@@ -155,6 +162,8 @@ func upgrade_success():
 
 
 func _on_upgrade_button_pressed() -> void:
+	if is_animating:
+		return
 	if button_state != GlobalEnums.UpgradeButtonStates.COMPLETED:
 		upgrade_requested.emit(self)
 

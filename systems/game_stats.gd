@@ -22,6 +22,9 @@ var currency_data_dictionary : Dictionary:  # przechowywuje dane wszystkich walu
 @onready var blue_currency : CurrencyData = preload("res://currency/blue_currency_data.tres")
 @onready var red_currency : CurrencyData = preload("res://currency/red_currency_data.tres")
 
+# Store unlocked abilities: {GlobalEnums.Abilities.DASH : True}
+var unlocked_abilities : Dictionary = {}
+
 
 func _ready() -> void:
 	currency_data_dictionary[blue_currency.type] = blue_currency
@@ -102,6 +105,32 @@ func add_currency(currency : CurrencyData, amount : int):
 	save_currency()
 
 
+func save_abilities() -> void:
+	if not GlobalSaveManager.save_file:
+		return
+	GlobalSaveManager.save_file.unlocked_abilities = unlocked_abilities.duplicate()
+
+
+func load_abilities() -> void:
+	if not GlobalSaveManager.save_file:
+		return
+	unlocked_abilities = GlobalSaveManager.save_file.unlocked_abilities.duplicate()
+
+
+func purge_abilities() -> void:
+	unlocked_abilities = {}
+	save_abilities()
+
+
+func unlock_ability(ability: GlobalEnums.Abilities) -> void:
+	unlocked_abilities[ability] = true
+	save_abilities()
+
+
+func is_ability_unlocked(ability: GlobalEnums.Abilities) -> bool:
+	return unlocked_abilities.get(ability, false)
+
+
 func try_upgrade(upgrade_data : UpgradeData):
 	for currency in upgrade_data.price:
 		var cost = upgrade_data.price[currency]
@@ -134,6 +163,8 @@ func apply_upgrade(upgrade_data : UpgradeData): ## Increases stats specified and
 				apply_operation(enemies_spawn_rate, upgrade_data, upgrade)
 			GlobalEnums.Stats.MONEY_MULTIPLIER:
 				apply_operation(money_multiplier, upgrade_data, upgrade)
+	if upgrade_data.ability_to_unlock != -1:
+		unlock_ability(upgrade_data.ability_to_unlock)
 	save_currency()
 	save_stats()
 

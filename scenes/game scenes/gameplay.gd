@@ -17,6 +17,9 @@ func _ready() -> void:
 	round_duration_bar.size.x = GlobalGameStats.round_duration.end_value * round_duration_bar.x_size_multiplier
 	round_time_remaining = round_duration
 	
+	if not GlobalGameStats.is_ability_unlocked(GlobalEnums.Abilities.UNLOCK_ENEMIES):
+		enemy_spawner.set_process(false)
+	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

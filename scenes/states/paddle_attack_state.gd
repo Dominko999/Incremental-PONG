@@ -3,7 +3,7 @@ class_name PaddleAttackState
 
 @export var character : CharacterBody2D
 @export var attack_speed : float = 300.0
-@export var attack_distance : float = 200.0
+@export var attack_distance : float = 25.0
 
 var base_x_position : float
 var max_x_position : float
@@ -27,7 +27,7 @@ func physics_update(delta: float) -> void:
 	elif returning:
 		character.velocity.x = -attack_speed * delta * 50
 	
-	if character.position.x >= attack_distance:
+	if character.position.x >= max_x_position:
 		returning = true
 	
 	if returning and character.position.x <= base_x_position:

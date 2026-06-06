@@ -14,8 +14,9 @@ func update(_delta: float) -> void:
 	pass
 
 func physics_update(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		transitioned.emit(self, "PaddleAttackState")
+	if GlobalGameStats.is_ability_unlocked(GlobalEnums.Abilities.DASH):
+		if Input.is_action_just_pressed("ui_accept"):
+			transitioned.emit(self, "PaddleAttackState")
 	
 	
 	var direction := Input.get_axis("ui_up", "ui_down")

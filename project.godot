@@ -27,6 +27,7 @@ GlobalSignals="*uid://dppci11ihk8ry"
 GlobalEnums="*uid://b4lequudu2560"
 GlobalTweens="*uid://bd2oc50af2nuh"
 GlobalSaveManager="*uid://blc1kt3tes4kv"
+GlobalSoundManager="*uid://ejvfo2veq2rp"
 
 [display]
 
@@ -104,4 +105,6 @@ ui_zoom_out={
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.1254902, 0.08235294, 0.2, 1)

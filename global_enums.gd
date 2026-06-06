@@ -19,3 +19,8 @@ enum Stats {
 	ENEMIES_SPAWN_RATE,
 	MONEY_MULTIPLIER
 }
+
+enum Abilities {
+	DASH,
+	UNLOCK_ENEMIES
+}

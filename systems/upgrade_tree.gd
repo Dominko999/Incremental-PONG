@@ -8,6 +8,8 @@ var target_position : Vector2
 var target_scale : Vector2
 
 
+
+
 func _ready() -> void:
 	target_position = position
 	target_scale = scale
@@ -69,7 +71,6 @@ func _on_button_upgrade_requested(button: UpgradeButtonControl) -> void:
 	var current_upgrade_data = button.upgrades[button.level]
 
 	if _can_afford(current_upgrade_data.price):
-
 		GlobalSignals.upgrade_to_apply.emit(current_upgrade_data)
 
 		button.upgrade_success()
