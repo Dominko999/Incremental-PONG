@@ -15,22 +15,21 @@ func _ready() -> void:
 	for child in get_children():
 		if child is UpgradeButtonControl:
 			child.upgrade_requested.connect(_on_button_upgrade_requested)
-			
-			if GlobalSaveManager.save_file:
-				var saved_level = GlobalSaveManager.save_file.upgrade_levels.get(child.upgrade_id)
-				
-				if saved_level != null:
-					child.level = GlobalSaveManager.save_file.upgrade_levels[child.upgrade_id]
-					if child.level != 0:
-						_unlock_next_nodes(child)
-						show_unfinished_lines(child)
-				else:
-					child.set_state(GlobalEnums.UpgradeButtonStates.HIDDEN)
-			
+			child.set_state(GlobalEnums.UpgradeButtonStates.HIDDEN)
 
+	if GlobalSaveManager.save_file:
+		var levels = GlobalSaveManager.save_file.upgrade_levels
+		for child in get_children():
+			if child is UpgradeButtonControl and levels.has(child.upgrade_id):
+				child.level = levels[child.upgrade_id]
+				if child.level > 0:
+					_unlock_next_nodes(child)
+						
 	for button in starting_buttons:
-		button.set_state(GlobalEnums.UpgradeButtonStates.NOT_UPGRADED)
-		show_unfinished_lines(button)
+		if button.button_state == GlobalEnums.UpgradeButtonStates.HIDDEN:
+			button.set_state(GlobalEnums.UpgradeButtonStates.NOT_UPGRADED)
+		if button.level > 0:
+			show_unfinished_lines(button)
 
 
 func save_button_levels() -> void:

@@ -13,6 +13,8 @@ func _ready() -> void:
 
 func _on_continue_button_button_down() -> void:
 	GlobalSaveManager.load_save()
+	GlobalGameStats.load_currency()
+	GlobalGameStats.load_stats()
 	GlobalSignals.transition_to_upgrade.emit()
 
 func _on_new_game_button_button_down() -> void:

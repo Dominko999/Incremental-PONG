@@ -7,19 +7,87 @@ var paddle_speed : Stat = Stat.new(500.0)
 var enemies_spawn_rate : Stat = Stat.new(1.0)
 var money_multiplier : Stat = Stat.new(1.0)
 
-var currency_data_dictionary : Dictionary  # przechowywuje dane wszystkich walut, jakie ma gracz
+@onready var stats_map : Dictionary = {
+	GlobalEnums.Stats.ROUND_DURATION: round_duration,
+	GlobalEnums.Stats.BALL_DAMAGE: ball_damage,
+	GlobalEnums.Stats.PADDLE_SPEED: paddle_speed,
+	GlobalEnums.Stats.ENEMIES_SPAWN_RATE: enemies_spawn_rate,
+	GlobalEnums.Stats.MONEY_MULTIPLIER: money_multiplier
+}
 
+var currency_data_dictionary : Dictionary:  # przechowywuje dane wszystkich walut, jakie ma gracz
+	set(value):
+		currency_data_dictionary = value
+		save_currency()
 @onready var blue_currency : CurrencyData = preload("res://currency/blue_currency_data.tres")
 @onready var red_currency : CurrencyData = preload("res://currency/red_currency_data.tres")
+
 
 func _ready() -> void:
 	currency_data_dictionary[blue_currency.type] = blue_currency
 	currency_data_dictionary[red_currency.type] = red_currency
 	GlobalSignals.upgrade_to_apply.connect(apply_upgrade)
 
+
+func save_stats() -> void:
+	if not GlobalSaveManager.save_file:
+		return
+
+	var save_data = {}
+
+	for stat_type in stats_map:
+		var stat_obj = stats_map[stat_type]
+		save_data[stat_type] = {
+			"base" : stat_obj.base_value,
+			"mult" : stat_obj.multiplier
+		}
+
+		GlobalSaveManager.save_file.stats_data = save_data
+
+
+func load_stats() -> void:
+	if not GlobalSaveManager.save_file:
+		return
+	
+	var save_data = GlobalSaveManager.save_file.stats_data
+	for stat_type in save_data:
+		var data = save_data[stat_type]
+		var stat_obj = stats_map[stat_type]
+		stat_obj.base_value = data.get("base", stat_obj.base_value)
+		stat_obj.multiplier = data.get("mult", stat_obj.multiplier)
+
+func save_currency() -> void:
+	if not GlobalSaveManager.save_file:
+		return
+	var save_data = GlobalSaveManager.save_file.currency_data
+	for type in currency_data_dictionary:
+		if not save_data.has(type):
+			save_data[type] = {
+				"amount_available": 0,
+				"total_amount_collected": 0
+			}
+		save_data[type].amount_available = currency_data_dictionary[type].amount_available
+		save_data[type].total_amount_collected = currency_data_dictionary[type].total_amount_collected
+
+
+func load_currency() -> void:
+	if not GlobalSaveManager.save_file:
+		print("SHIT")
+		return
+	var save_data = GlobalSaveManager.save_file.currency_data
+	for type in save_data:
+		if currency_data_dictionary.has(type):
+			print(save_data[type].amount_available)
+			print(save_data[type].total_amount_collected)
+			currency_data_dictionary[type].amount_available = save_data[type].amount_available
+			currency_data_dictionary[type].total_amount_collected = save_data[type].total_amount_collected
+
+
 func add_currency(currency : CurrencyData, amount : int):
 	currency_data_dictionary[currency.type].amount_available += amount
 	GlobalSignals.emit_signal("currency_changed", currency.type, amount)
+	save_currency()
+
 
 func try_upgrade(upgrade_data : UpgradeData):
 	for currency in upgrade_data.price:
@@ -28,22 +96,14 @@ func try_upgrade(upgrade_data : UpgradeData):
 			return
 	apply_upgrade(upgrade_data)
 
+
 func get_stat_end_value(stat : GlobalEnums.Stats):
-	match stat:
-		GlobalEnums.Stats.ROUND_DURATION: return round_duration.end_value
-		GlobalEnums.Stats.BALL_DAMAGE: return ball_damage.end_value
-		GlobalEnums.Stats.PADDLE_SPEED: return paddle_speed.end_value
-		GlobalEnums.Stats.ENEMIES_SPAWN_RATE: return enemies_spawn_rate.end_value
-		GlobalEnums.Stats.MONEY_MULTIPLIER: return money_multiplier.end_value
+	return get_stat(stat).end_value
+
 
 func get_stat(stat : GlobalEnums.Stats):
-	match stat:
-		GlobalEnums.Stats.ROUND_DURATION: return round_duration
-		GlobalEnums.Stats.BALL_DAMAGE: return ball_damage
-		GlobalEnums.Stats.PADDLE_SPEED: return paddle_speed
-		GlobalEnums.Stats.ENEMIES_SPAWN_RATE: return enemies_spawn_rate
-		GlobalEnums.Stats.MONEY_MULTIPLIER: return money_multiplier
-		
+	return stats_map.get(stat)
+
 
 func apply_upgrade(upgrade_data : UpgradeData): ## Increases stats specified and subtracts currency
 	for currency in upgrade_data.price:
@@ -61,6 +121,8 @@ func apply_upgrade(upgrade_data : UpgradeData): ## Increases stats specified and
 				apply_operation(enemies_spawn_rate, upgrade_data, upgrade)
 			GlobalEnums.Stats.MONEY_MULTIPLIER:
 				apply_operation(money_multiplier, upgrade_data, upgrade)
+	save_currency()
+	save_stats()
 
 
 func apply_operation(stat : Stat, upgrade_data : UpgradeData, upgrade):

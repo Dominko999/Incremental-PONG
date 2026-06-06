@@ -129,6 +129,7 @@ texture = SubResource("AtlasTexture_i4ltn")
 layout_mode = 1
 offset_left = -598.0
 offset_right = -332.0
+scale = Vector2(1, 1.0093418)
 upgrade_id = "paddle_speed_1"
 upgrade_name = "Paddle speed +"
 upgrade_description = "Makes the paddle faster"

@@ -63,25 +63,27 @@ func apply_button_state():
 
 func refresh_button():
 	apply_button_state()
-	if not button_state == GlobalEnums.UpgradeButtonStates.COMPLETED:
-		if not stat_change_container:
-			stat_change_container = StatChangeContainer.new(upgrades[level])
-			labels_container.add_child(stat_change_container)
-		else:
-			stat_change_container.upgrade_data = upgrades[level]
-		
-		if not currency_container:
-			currency_container = CurrencyContainer.new(upgrades[level].price)
-			labels_container.add_child(currency_container)
-		else:
-			currency_container.currencies_to_display = upgrades[level].price	
-		
-		fill_tooltip()
-	else:
+	if button_state == GlobalEnums.UpgradeButtonStates.COMPLETED or level >= upgrades.size():
 		if currency_container:
 			currency_container.queue_free()
 		if stat_change_container:
 			stat_change_container.queue_free()
+		return
+		
+	if not stat_change_container:
+		stat_change_container = StatChangeContainer.new(upgrades[level])
+		labels_container.add_child(stat_change_container)
+	else:
+		stat_change_container.upgrade_data = upgrades[level]
+		
+	if not currency_container:
+		currency_container = CurrencyContainer.new(upgrades[level].price)
+		labels_container.add_child(currency_container)
+	else:
+		currency_container.currencies_to_display = upgrades[level].price
+		
+		fill_tooltip()
+		
 
 
 func add_completed_label():
