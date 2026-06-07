@@ -8,10 +8,14 @@ var sounds = {
 	GlobalEnums.Sounds.BOUNCE : preload("res://music/bounce.wav")
 }
 
+var music = preload("res://music/main_track_v1.wav")
 
 func _ready():
 	get_tree().node_added.connect(_on_node_added)
-
+	var music_player = AudioStreamPlayer.new()
+	music_player.stream = music
+	add_child(music_player)
+	music_player.play()
 
 func _on_node_added(node):
 	if node is BaseButton:
