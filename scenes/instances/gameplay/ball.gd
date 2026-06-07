@@ -42,13 +42,15 @@ func manage_states():
 		FiredBy.PLAYER:
 			hitbox.shape.disabled = false
 
-func bounce_from_paddle(collider):
+func bounce_from_paddle(paddle_collider):
 	var ball_y = position.y
-	var paddle_y = collider.position.y
+	var paddle_y = paddle_collider.position.y
 	var distance = paddle_y - ball_y
-	var paddle_height = collider.height
+	var paddle_height = paddle_collider.height
 	
 	current_state = FiredBy.PLAYER
+	
+	GlobalSoundManager.play_sfx(GlobalEnums.Sounds.BOUNCE, true)
 	
 	dir.x *= -1
 	dir.y = - distance / paddle_height

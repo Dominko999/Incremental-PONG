@@ -24,3 +24,10 @@ enum Abilities {
 	DASH,
 	UNLOCK_ENEMIES
 }
+
+enum Sounds {
+	CLICK,
+	EXPLOSION,
+	PICKUP,
+	BOUNCE
+}

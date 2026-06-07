@@ -10,14 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Pong Roguelike"
+config/name="Incremental Pong"
 run/main_scene="uid://bosucqc70h8ko"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/stretch_mode=3
 boot_splash/use_filter=false
 boot_splash/image="uid://dll2k8ffah1e"
-config/icon="res://icon.svg"
+config/icon="uid://tah1mafgtwoh"
 boot_splash/minimum_display_time=2000
 
 [autoload]

@@ -10,6 +10,9 @@
 [ext_resource type="Script" uid="uid://j3gmm1nhrmy2" path="res://scenes/states/state_machine.gd" id="6_v7ugw"]
 [ext_resource type="Script" uid="uid://bkplay2jlppyi" path="res://scenes/states/spawned_state.gd" id="7_sit3b"]
 [ext_resource type="Script" uid="uid://bhphter5pcjc0" path="res://scenes/states/patrol_state.gd" id="8_7v0ic"]
+[ext_resource type="Script" uid="uid://txj1ux15o8jl" path="res://scenes/components/particles_component.gd" id="11_fay2h"]
+[ext_resource type="PackedScene" uid="uid://bnhaq51q3e7ux" path="res://scenes/instances/gameplay/particle explosion.tscn" id="12_oi6m7"]
+[ext_resource type="Script" uid="uid://cqqenndnos85t" path="res://scenes/components/sfx_component.gd" id="13_hwydv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ra3w"]
 animations = [{
@@ -76,3 +79,14 @@ script = ExtResource("8_7v0ic")
 enemy = NodePath("../..")
 shooter = NodePath("../../ShooterComponent")
 metadata/_custom_type_script = "uid://bhphter5pcjc0"
+
+[node name="ParticlesComponent" type="Node2D" parent="." unique_id=305998447]
+script = ExtResource("11_fay2h")
+particle_explosion = ExtResource("12_oi6m7")
+
+[node name="SFXComponent" type="Node2D" parent="." unique_id=1653631665]
+script = ExtResource("13_hwydv")
+death_sfx = 1
+
+[connection signal="on_death" from="HealthComponent" to="ParticlesComponent" method="_on_health_component_on_death"]
+[connection signal="on_death" from="HealthComponent" to="SFXComponent" method="_on_health_component_on_death"]
