@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dmwucu7omk0ua"]
+
+[ext_resource type="Script" uid="uid://dlu3ueplemd06" path="res://scenes/instances/gameplay/collectible_group.gd" id="1_4uqf7"]
+[ext_resource type="PackedScene" uid="uid://b4s4vsu3dpd5g" path="res://scenes/instances/collectibles/small_wisp.tscn" id="2_hkbnd"]
+[ext_resource type="Resource" uid="uid://xqjfr8f1qpse" path="res://currency/blue_currency_data.tres" id="3_hkbnd"]
+[ext_resource type="Script" uid="uid://cu5s10566rprs" path="res://scenes/instances/collectibles/currency_reward.gd" id="4_tgb4r"]
+
+[sub_resource type="Resource" id="Resource_hkbnd"]
+script = ExtResource("4_tgb4r")
+currency = ExtResource("3_hkbnd")
+amount = 2
+metadata/_custom_type_script = "uid://cu5s10566rprs"
+
+[node name="CollectibleGroup" type="Node2D" unique_id=294181036]
+script = ExtResource("1_4uqf7")
+collectible = ExtResource("2_hkbnd")
+amount_range = Vector2(5, 12)
+distance_horizontal = 100.0
+distance_vertical = 100.0
+currency_reward = SubResource("Resource_hkbnd")
+modulate_color = true
+
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

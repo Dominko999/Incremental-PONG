@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dv1eh0x7el4p1" path="res://scenes/game scenes/upgrade_button_control.gd" id="2_bwqgq"]
 [ext_resource type="Texture2D" uid="uid://cdg0dpuun0hnc" path="res://data/enemy_placeholder.png" id="3_1et3g"]
 [ext_resource type="Theme" uid="uid://b2l8qk58axwo5" path="res://data/fonts/medium_font_theme.tres" id="3_kxfwh"]
+[ext_resource type="Theme" uid="uid://dia2e33andsv5" path="res://data/fonts/ability_upgrade_button.tres" id="5_6t1cb"]
 [ext_resource type="StyleBox" uid="uid://cbgm8r2wfr41" path="res://data/fonts/empty_level_panel.tres" id="6_popud"]
 [ext_resource type="Theme" uid="uid://3xfygpwkt1lg" path="res://data/fonts/small_font_theme.tres" id="6_ylyb0"]
 [ext_resource type="StyleBox" uid="uid://c2idqiw8nebjv" path="res://data/fonts/full_level_panel.tres" id="7_npm05"]
@@ -41,6 +42,7 @@ upgrade_name = "Name"
 upgrade_description = "Description"
 full_level_panel_theme = ExtResource("7_npm05")
 empty_level_panel_theme = ExtResource("6_popud")
+ability_upgrade_theme = ExtResource("5_6t1cb")
 
 [node name="UpgradeButtonMask" type="Button" parent="." unique_id=1387287174]
 unique_name_in_owner = true

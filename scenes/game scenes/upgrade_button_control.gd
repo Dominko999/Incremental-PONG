@@ -13,6 +13,8 @@ signal upgrade_requested(button : UpgradeButtonControl)
 @export var full_level_panel_theme : StyleBoxFlat
 @export var empty_level_panel_theme : StyleBoxFlat
 
+@export var ability_upgrade_theme : Theme
+
 var level : int = 0:
 	set(value):
 		level = value
@@ -34,6 +36,8 @@ var is_animating : bool = false
 @onready var click_failed_audio_player : AudioStreamPlayer = %ClickFailedAudioPlayer
 
 func _ready() -> void:
+	if upgrades != null and upgrades[0].ability_to_unlock != -1:
+		button_mask.theme = ability_upgrade_theme
 	button_state = GlobalEnums.UpgradeButtonStates.NOT_UPGRADED
 	button_mask.icon = texture
 	max_level = len(upgrades) - 1

@@ -1,7 +1,10 @@
 extends Area2D
 class_name Collectible
 
+signal collected_by_player
+
 @export var currency_rewards : Array[CurrencyReward] # an resource that stores the id and amount of currency earned after collecting the collectible
+@warning_ignore("int_as_enum_without_cast", "int_as_enum_without_match")
 @export var collected_sfx : GlobalEnums.Sounds = -1
 
 
@@ -22,5 +25,5 @@ func collect():
 	if collected_sfx != -1:
 		GlobalSoundManager.play_sfx(collected_sfx, true)
 		
-	
+	collected_by_player.emit()
 	queue_free()

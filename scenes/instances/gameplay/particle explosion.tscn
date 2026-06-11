@@ -3,11 +3,54 @@
 [ext_resource type="Texture2D" uid="uid://cu61qu0pt22ln" path="res://data/red_currency_placeholder.png" id="1_phyy8"]
 [ext_resource type="Script" uid="uid://l6esga425keb" path="res://scenes/instances/gameplay/particle_explosion.gd" id="2_ua8e0"]
 
+[sub_resource type="Shader" id="Shader_l8uv0"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+// W CanvasGroup musimy czytać z backbufora ekranu, żeby zachować logikę tego węzła
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+
+uniform vec2 shadow_offset = vec2(4.0, 4.0);
+uniform vec4 shadow_color : source_color = vec4(0.0, 0.0, 0.0, 0.5);
+
+void fragment() {
+    // 1. Pobieramy zbuforowany obraz grupy z ekranu
+    vec4 col = textureLod(screen_texture, SCREEN_UV, 0.0);
+    
+    // Wbudowany mechanizm CanvasGroup używa pre-multiplied alpha, więc to cofamy
+    if (col.a > 0.0001) {
+        col.rgb /= col.a;
+    }
+
+    // 2. Przesuwamy koordynaty, żeby stworzyć maskę dla naszego cienia
+    vec2 ps = SCREEN_PIXEL_SIZE;
+    vec4 shadow_mask = textureLod(screen_texture, SCREEN_UV - shadow_offset * ps, 0.0);
+    
+    // 3. Obliczamy kolor cienia z odpowiednią przezroczystością maski
+    vec4 shadow = shadow_color;
+    shadow.a *= shadow_mask.a;
+
+    // 4. Mieszamy: najpierw rysujemy cień, a na to nakładamy właściwe obiekty
+    vec4 final_color = mix(shadow, col, col.a);
+
+    // Przekazujemy ostateczny wynik
+    COLOR *= final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ua8e0"]
+shader = SubResource("Shader_l8uv0")
+shader_parameter/shadow_offset = Vector2(5, 5)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.5882353)
+
 [sub_resource type="Gradient" id="Gradient_ua8e0"]
 offsets = PackedFloat32Array(0.4865643, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
-[node name="Node2D" type="CPUParticles2D" unique_id=1704036438]
+[node name="CanvasGroup" type="CanvasGroup" unique_id=121765268]
+material = SubResource("ShaderMaterial_ua8e0")
+
+[node name="Node2D" type="CPUParticles2D" parent="." unique_id=1704036438]
 emitting = false
 amount = 5
 texture = ExtResource("1_phyy8")

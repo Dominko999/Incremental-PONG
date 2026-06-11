@@ -6,6 +6,7 @@ var round_time_remaining : float
 @onready var player_paddle = %PlayerPaddle
 @onready var enemy_spawner = %EnemySpawner
 @onready var small_wisp_spawner = %SmallWispSpawner
+@onready var small_wisp_group_spawner = %SmallWispGroupSpawner
 
 
 
@@ -20,6 +21,8 @@ func _ready() -> void:
 	if not GlobalGameStats.is_ability_unlocked(GlobalEnums.Abilities.UNLOCK_ENEMIES):
 		enemy_spawner.set_process(false)
 	
+	if not GlobalGameStats.is_ability_unlocked(GlobalEnums.Abilities.UNLOCK_COLLECTIBLE_GROUPS):
+		small_wisp_group_spawner.set_process(false)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

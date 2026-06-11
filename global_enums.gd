@@ -22,7 +22,8 @@ enum Stats {
 
 enum Abilities {
 	DASH,
-	UNLOCK_ENEMIES
+	UNLOCK_ENEMIES,
+	UNLOCK_COLLECTIBLE_GROUPS
 }
 
 enum Sounds {

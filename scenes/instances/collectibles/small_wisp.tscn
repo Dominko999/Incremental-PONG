@@ -70,6 +70,7 @@ collected_sfx = 2
 shape = SubResource("CircleShape2D_yhx0g")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=969829303]
+unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_p88q0")
 autoplay = "default"
 frame_progress = 0.26382428

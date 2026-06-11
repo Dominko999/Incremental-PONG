@@ -43,6 +43,9 @@ func randomize_treshold():
 	treshold = randf_range(treshold_range.x,treshold_range.y)
 
 func spawn_enemy():
+	if scene_to_spawn == null:
+		return
+	
 	var instance = scene_to_spawn.instantiate()
 	parent_node.add_child(instance)
 	if spawn_in_child_collision_shape:

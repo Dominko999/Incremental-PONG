@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bggxgrmh8htld" path="res://scenes/instances/gameplay/player_paddle.tscn" id="2_rlidi"]
 [ext_resource type="PackedScene" uid="uid://7omus5dqmadm" path="res://scenes/instances/gameplay/enemy.tscn" id="3_1qnfl"]
 [ext_resource type="Script" uid="uid://dbnu8jdm0ukv2" path="res://scenes/instances/gameplay/spawner.gd" id="4_urrcd"]
-[ext_resource type="PackedScene" uid="uid://b4s4vsu3dpd5g" path="res://scenes/instances/collectibles/small_wisp.tscn" id="5_puebw"]
 [ext_resource type="Script" uid="uid://bclkxb2jnterm" path="res://systems/progress_bar.gd" id="6_8stqr"]
 [ext_resource type="Theme" uid="uid://bvktfcrpfwxtk" path="res://data/fonts/big_font_theme.tres" id="6_l8uv0"]
+[ext_resource type="PackedScene" uid="uid://dmwucu7omk0ua" path="res://scenes/instances/collectibles/collectible_group.tscn" id="6_o7h44"]
 
 [sub_resource type="Shader" id="Shader_l8uv0"]
 resource_local_to_scene = true
@@ -124,7 +124,6 @@ shape = SubResource("RectangleShape2D_wowpa")
 unique_name_in_owner = true
 position = Vector2(990, 0)
 script = ExtResource("4_urrcd")
-scene_to_spawn = ExtResource("5_puebw")
 parent_node_name = "collectibles_parent"
 treshold_range = Vector2(0.5, 1)
 spawn_in_child_collision_shape = true
@@ -132,6 +131,20 @@ spawn_area_shape = NodePath("SmallWispSpawnArea")
 metadata/_custom_type_script = "uid://dbnu8jdm0ukv2"
 
 [node name="SmallWispSpawnArea" type="CollisionShape2D" parent="CanvasGroup/SmallWispSpawner" unique_id=431576649]
+shape = SubResource("RectangleShape2D_i6g32")
+
+[node name="SmallWispGroupSpawner" type="Area2D" parent="." unique_id=1985079833 node_paths=PackedStringArray("spawn_area_shape")]
+unique_name_in_owner = true
+position = Vector2(1980, 0)
+script = ExtResource("4_urrcd")
+scene_to_spawn = ExtResource("6_o7h44")
+parent_node_name = "collectibles_parent"
+treshold_range = Vector2(3, 4)
+spawn_in_child_collision_shape = true
+spawn_area_shape = NodePath("SmallWispSpawnArea")
+metadata/_custom_type_script = "uid://dbnu8jdm0ukv2"
+
+[node name="SmallWispSpawnArea" type="CollisionShape2D" parent="SmallWispGroupSpawner" unique_id=203260011]
 shape = SubResource("RectangleShape2D_i6g32")
 
 [node name="UI" type="Control" parent="." unique_id=1336958336]

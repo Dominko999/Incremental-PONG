@@ -72,6 +72,7 @@ initial_state = NodePath("SpawnedState")
 [node name="SpawnedState" type="Node" parent="StateMachine" unique_id=1658949298 node_paths=PackedStringArray("enemy")]
 script = ExtResource("7_sit3b")
 enemy = NodePath("../..")
+speed = 300
 metadata/_custom_type_script = "uid://bkplay2jlppyi"
 
 [node name="PatrolState" type="Node" parent="StateMachine" unique_id=1494353437 node_paths=PackedStringArray("enemy", "shooter")]
