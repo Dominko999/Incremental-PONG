@@ -8,6 +8,11 @@ var save_file : SaveFile:
 		if save_file and not save_file.save_file_changed.is_connected(write_save):
 			save_file.save_file_changed.connect(write_save) 
 
+func _ready() -> void:
+	GlobalSignals.transition_to_gameplay.connect(write_save)
+	GlobalSignals.transition_to_upgrade.connect(write_save)
+	GlobalSignals.transition_to_menu.connect(write_save)
+
 func write_save() -> void:
 	if save_file: 
 		ResourceSaver.save(save_file, SAVE_GAME_PATH)

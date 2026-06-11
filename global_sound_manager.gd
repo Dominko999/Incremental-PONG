@@ -5,7 +5,8 @@ var sounds = {
 	GlobalEnums.Sounds.CLICK : preload("res://music/SFX_UI_Click_Organic_Pop_Liquid_Thick_Generic_1.wav"),
 	GlobalEnums.Sounds.EXPLOSION : preload("res://music/explosion.wav"),
 	GlobalEnums.Sounds.PICKUP : preload("res://music/pickup.wav"),
-	GlobalEnums.Sounds.BOUNCE : preload("res://music/bounce.wav")
+	GlobalEnums.Sounds.BOUNCE : preload("res://music/bounce.wav"),
+	GlobalEnums.Sounds.ALL_COLLECTED : preload("res://music/all_collected.ogg")
 }
 
 var music = preload("res://music/main_track_v1.wav")

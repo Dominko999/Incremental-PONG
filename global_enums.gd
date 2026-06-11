@@ -30,5 +30,6 @@ enum Sounds {
 	CLICK,
 	EXPLOSION,
 	PICKUP,
-	BOUNCE
+	BOUNCE,
+	ALL_COLLECTED,
 }
