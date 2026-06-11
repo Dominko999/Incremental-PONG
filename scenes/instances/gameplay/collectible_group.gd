@@ -32,17 +32,20 @@ var recorded_positions : PackedVector2Array = []
 var active_start_index : int = 0
 var total_dead : int = 0
 
+var previous_y_position : float
+
 
 func _ready() -> void:
 	@warning_ignore("narrowing_conversion")
 	amount = randi_range(amount_range.x,amount_range.y)
 	
-	var current_y = 0
 	for i in range(0, amount):
 		var instance = collectible.instantiate() as Collectible
+		add_child(instance)
+		
 		instance.global_position.y = calculate_collectible_y_position(instance.global_position.y)
 		instance.global_position.x += distance_horizontal * i
-		add_child(instance)
+		
 		
 		all_collectibles.append(instance)
 		recorded_positions.append(instance.position)
@@ -63,8 +66,14 @@ func tint_color():
 
 
 func calculate_collectible_y_position(y_global_position : float) -> float:
-	var y_position = clampf(y_global_position + distance_vertical * randi_range(-1,1), -500, 500)
-	return y_position
+	if previous_y_position == null:
+		previous_y_position = y_global_position
+	
+	var next_global_y = clampf(previous_y_position + distance_vertical * randi_range(-1, 1), -500, 500)
+
+	previous_y_position = next_global_y
+
+	return next_global_y
 	
 
 func _process(_delta: float) -> void:

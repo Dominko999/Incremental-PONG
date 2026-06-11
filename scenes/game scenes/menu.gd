@@ -2,14 +2,23 @@ extends Scene
 
 @onready var continue_button : Button = %ContinueButton
 @onready var new_game_button : Button = %NewGameButton
-
+@onready var crown : Sprite2D = %Crown
 
 func _ready() -> void:
 	new_game_button.show()
 	if GlobalSaveManager.save_exists():
+		GlobalSaveManager.load_save()
+		GlobalGameStats.load_currency()
+		GlobalGameStats.load_stats()
+		GlobalGameStats.load_abilities()
 		continue_button.show()
 	else:
 		continue_button.hide()
+	
+	if GlobalGameStats.is_ability_unlocked(GlobalEnums.Abilities.CHAMPION):
+		crown.show()
+	else:
+		crown.hide()
 
 
 func _on_continue_button_pressed() -> void:

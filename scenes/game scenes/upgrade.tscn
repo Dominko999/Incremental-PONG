@@ -270,6 +270,19 @@ metadata/_custom_type_script = "uid://d3yuxola7qj44"
 atlas = ExtResource("8_bwtvb")
 region = Rect2(144, 0, 16, 16)
 
+[sub_resource type="Resource" id="Resource_10gq0"]
+script = ExtResource("6_hf487")
+price = Dictionary[int, int]({
+0: 15000,
+1: 1500
+})
+ability_to_unlock = 3
+metadata/_custom_type_script = "uid://d3yuxola7qj44"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqsgh"]
+atlas = ExtResource("8_bwtvb")
+region = Rect2(112, 0, 16, 16)
+
 [node name="Upgrade" type="Node2D" unique_id=306167025]
 script = ExtResource("1_if82p")
 
@@ -430,7 +443,7 @@ offset_top = -128.0
 offset_right = 908.0
 offset_bottom = 136.0
 upgrade_id = "unlock_enemies"
-upgrade_name = "Unlock Enemies"
+upgrade_name = "Enemies"
 upgrade_description = "Unlocks enemies, that when defeated give you red currency"
 upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_e56nw")])
 next_upgrade_buttons = [NodePath("../UpgradeButtonControl7")]
@@ -443,10 +456,23 @@ offset_top = -640.0
 offset_right = 524.0
 offset_bottom = -376.0
 upgrade_id = "unlock_currency_groups"
-upgrade_name = "Unlock Currency Groups"
+upgrade_name = "Currency Groups"
 upgrade_description = "Currency will now appear in groups, getting whole group gives you a bonus"
 upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_du76a")])
 texture = SubResource("AtlasTexture_10gq0")
+
+[node name="FinalUpgradeButton" parent="Control/UpgradeTree" unique_id=1981935504 instance=ExtResource("5_i4ltn")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -126.0
+offset_top = -640.0
+offset_right = 140.0
+offset_bottom = -376.0
+upgrade_id = "champion"
+upgrade_name = "Champion"
+upgrade_description = "The ultimate upgrade. See the menu after buying it"
+upgrades = Array[ExtResource("6_hf487")]([SubResource("Resource_10gq0")])
+texture = SubResource("AtlasTexture_fqsgh")
 
 [node name="GoToMenuContainer" type="VBoxContainer" parent="Control" unique_id=1219487047]
 z_index = 3

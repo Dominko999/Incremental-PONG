@@ -3,11 +3,16 @@
 [ext_resource type="Script" uid="uid://c871g2i2phyun" path="res://scenes/game scenes/menu.gd" id="1_51q6v"]
 [ext_resource type="Theme" uid="uid://bvktfcrpfwxtk" path="res://data/fonts/big_font_theme.tres" id="2_51q6v"]
 [ext_resource type="Shader" uid="uid://d0ardldev6luu" path="res://shaders/shadow.gdshader" id="2_ejtpu"]
+[ext_resource type="Texture2D" uid="uid://bmi6cdfdqtyjk" path="res://data/upgrades.png" id="4_rlipe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rlipe"]
 shader = ExtResource("2_ejtpu")
 shader_parameter/shadow_offset = Vector2(10, 10)
 shader_parameter/shadow_color = Color(0, 0, 0, 0.5882353)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uljek"]
+atlas = ExtResource("4_rlipe")
+region = Rect2(112, 0, 16, 16)
 
 [node name="menu" type="Node2D" unique_id=935068314]
 script = ExtResource("1_51q6v")
@@ -75,6 +80,11 @@ offset_bottom = 113.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 200
 text = "INCREMENTAL PONG"
+
+[node name="Crown" type="Sprite2D" parent="CanvasGroup" unique_id=205052068]
+unique_name_in_owner = true
+scale = Vector2(11.375, 11.375)
+texture = SubResource("AtlasTexture_uljek")
 
 [connection signal="pressed" from="CanvasGroup/Control/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="button_down" from="CanvasGroup/Control/VBoxContainer/HBoxContainer/NewGameButton" to="." method="_on_new_game_button_button_down"]

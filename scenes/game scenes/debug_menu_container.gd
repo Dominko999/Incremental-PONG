@@ -7,15 +7,16 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_open_debug"):
-		if is_shown:
-			hide()
-			is_shown = false
-		else:
-			show()
-			is_shown = true
-
+func _process(_delta: float) -> void:
+	pass
+	#if Input.is_action_just_pressed("ui_open_debug"):
+		#if is_shown:
+			#hide()
+			#is_shown = false
+		#else:
+			#show()
+			#is_shown = true
+	
 
 func _on_add_ten_blue_button_pressed() -> void:
 	GlobalGameStats.currency_data_dictionary[GlobalEnums.CurrencyType['BLUE']].amount_available += 10

@@ -7,7 +7,7 @@ var is_dragging : bool = false
 var target_position : Vector2
 var target_scale : Vector2
 
-
+@onready var final_upgrade_button : UpgradeButtonControl = %FinalUpgradeButton
 
 
 func _ready() -> void:
@@ -33,6 +33,8 @@ func _ready() -> void:
 			button.set_state(GlobalEnums.UpgradeButtonStates.NOT_UPGRADED)
 		if button.level > 0:
 			show_unfinished_lines(button)
+	
+	try_unlock_final_button() 
 
 
 func save_button_levels() -> void:
@@ -78,6 +80,8 @@ func _on_button_upgrade_requested(button: UpgradeButtonControl) -> void:
 		_unlock_next_nodes(button)
 		
 		refresh_tooltips()
+		
+		try_unlock_final_button()
 
 		save_button_levels()
 	else:
@@ -119,7 +123,22 @@ func show_unfinished_lines(button : UpgradeButtonControl):
 		unfinished_line.gradient = unfinished_line_gradient
 		add_child(unfinished_line)
 
+
 func refresh_tooltips() -> void:
 	for child in get_children():
 		if child is UpgradeButtonControl:
 			child.refresh_button()
+
+
+func try_unlock_final_button() -> void:
+	var completed_buttons : int = 0
+	var button_count : int = 0
+	for child in get_children():
+		if child is UpgradeButtonControl:
+			button_count += 1
+			if child.button_state == GlobalEnums.UpgradeButtonStates.COMPLETED:
+				completed_buttons += 1
+
+	if completed_buttons + 1 == button_count:
+		print("DZIALA")
+		final_upgrade_button.set_state(GlobalEnums.UpgradeButtonStates.NOT_UPGRADED)

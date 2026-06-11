@@ -9,7 +9,6 @@ var round_time_remaining : float
 @onready var small_wisp_group_spawner = %SmallWispGroupSpawner
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var round_duration = GlobalGameStats.round_duration.end_value
@@ -31,6 +30,7 @@ func _process(delta: float) -> void:
 	round_duration_bar.value = round_time_remaining
 	if round_time_remaining <= 0:
 		GlobalSignals.transition_to_upgrade.emit()
+	
 
 func _on_ball_player_hit() -> void:
 	round_time_remaining -= 1

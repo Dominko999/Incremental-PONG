@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bclkxb2jnterm" path="res://systems/progress_bar.gd" id="6_8stqr"]
 [ext_resource type="Theme" uid="uid://bvktfcrpfwxtk" path="res://data/fonts/big_font_theme.tres" id="6_l8uv0"]
 [ext_resource type="PackedScene" uid="uid://dmwucu7omk0ua" path="res://scenes/instances/collectibles/collectible_group.tscn" id="6_o7h44"]
+[ext_resource type="Script" uid="uid://ddjra1knsxurj" path="res://scenes/game scenes/pause_menu.gd" id="9_bck13"]
 
 [sub_resource type="Shader" id="Shader_l8uv0"]
 resource_local_to_scene = true
@@ -172,3 +173,45 @@ offset_bottom = 40.0
 value = 18.78
 show_percentage = false
 script = ExtResource("6_8stqr")
+
+[node name="PauseMenu" type="Control" parent="UI" unique_id=1211915508]
+unique_name_in_owner = true
+process_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_bck13")
+
+[node name="ColorRect" type="ColorRect" parent="UI/PauseMenu" unique_id=130594354]
+layout_mode = 0
+offset_left = -168.0
+offset_top = -155.0
+offset_right = 1907.0
+offset_bottom = 1094.0
+color = Color(0, 0, 0, 0.62352943)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu" unique_id=694746521]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 701.5
+offset_top = 636.0
+offset_right = 986.5
+offset_bottom = 912.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 30
+
+[node name="ResumeButton" type="Button" parent="UI/PauseMenu/VBoxContainer" unique_id=2105560439]
+layout_mode = 2
+text = "Resume"
+
+[node name="QuitButton" type="Button" parent="UI/PauseMenu/VBoxContainer" unique_id=1113653191]
+layout_mode = 2
+text = "End run"
+
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/ResumeButton" to="UI/PauseMenu" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/QuitButton" to="UI/PauseMenu" method="_on_quit_button_pressed"]

@@ -47,9 +47,12 @@ func spawn_enemy():
 		return
 	
 	var instance = scene_to_spawn.instantiate()
-	parent_node.add_child(instance)
+	
 	if spawn_in_child_collision_shape:
 		instance.global_position = get_random_place_in_child_area()
+		
+	parent_node.add_child(instance)
+	
 
 func get_random_place_in_child_area(): 
 	var extents = shape.extents 
